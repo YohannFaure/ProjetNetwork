@@ -2,8 +2,13 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import collections
+import ReadTSV
 
-G = nx.read_gml('power.gml', label = 'id')
+### Importing the graph
+
+
+
+### Basic stuff
 
 G.number_of_nodes()
 G.number_of_edges()
