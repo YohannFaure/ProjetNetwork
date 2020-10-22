@@ -1,3 +1,6 @@
+
+
+
 import networkx as nx
 
 def remove_header(location):
@@ -16,6 +19,8 @@ def remove_header(location):
 
 def remove_data(location):
     """
+    Designed specificaly to deal with
+    http://snap.stanford.edu/data/soc-RedditHyperlinks.html
     Returns the POST_PROPERTIES in an array and removes it from the file
     """
     f=open(location)
@@ -33,6 +38,10 @@ def remove_data(location):
     return(None)
 
 def get_data(location):
+    """
+    To get the data
+    http://snap.stanford.edu/data/soc-RedditHyperlinks.html
+    """
     f=open(location)
     lines=f.readlines()
     l=[]
@@ -44,6 +53,9 @@ def get_data(location):
 
 
 def data_to_graph(location):
+    """
+    Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a graph.
+    """
     def dic_create(edge_splited):
         dic = {"POST_ID": edge_splited[2], "TIMESTAMP": edge_splited[3],
                'POST_LABEL':edge_splited[4], 'POST_PROPERTIES':edge_splited[5]}
@@ -53,6 +65,25 @@ def data_to_graph(location):
     header=lines[0]
     edges=lines[1:]
     G = nx.Graph()
+    for e in edges:
+        e_splited=e.split('\t')
+        dic_e=dic_create(e_splited)
+        G.add_edge(e_splited[0],e_splited[1],attr=dic_e)
+    return(G)
+
+def data_to_digraph(location):
+    """
+    Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a graph.
+    """
+    def dic_create(edge_splited):
+        dic = {"POST_ID": edge_splited[2], "TIMESTAMP": edge_splited[3],
+               'POST_LABEL':edge_splited[4], 'POST_PROPERTIES':edge_splited[5]}
+        return(dic)
+    f=open(location)
+    lines=f.readlines()
+    header=lines[0]
+    edges=lines[1:]
+    G = nx.DiGraph()
     for e in edges:
         e_splited=e.split('\t')
         dic_e=dic_create(e_splited)
