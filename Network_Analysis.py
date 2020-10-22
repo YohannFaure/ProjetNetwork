@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-G = nx.read_edgelist("C:/Users/Flora/Desktop/M2 Systèmes Complexes/Complex Networks/Tutorial_1/airportData.edges")
+G = nx.read_gml('power.gml', label = 'id')
 
 G.number_of_nodes()
 G.number_of_edges()
