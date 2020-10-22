@@ -15,7 +15,7 @@ The goal here is to make some data analysis on graphs. The graph we will focus o
 
 ## File conversion
 
-We will first work on the data conversion, _i.e._ converting the original file type ($\texttt{.tsv}$) into some NetworkX understandable data.
+We will first work on the data conversion, _i.e._ converting the original file type (_.tsv_) into some NetworkX understandable data.
 
 The data file is in tab separated format :
 
