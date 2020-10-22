@@ -22,3 +22,12 @@ def degree_distribution(G):
   nodes_by_degree = [t[0] for t in sorted(G.degree, key=lambda x: x[1], reverse=True)]
   
   return(nodes_by_degree, degree_sequence)
+
+
+def clustering_coefficient(G):
+    G_clustering = nx.clustering(G)
+    G_clustering = G_clustering.items()
+    nodes_by_clustering_coefficient = [t[0] for t in sorted(G_clustering, key=lambda x: x[1], reverse=True)]
+    clustering_coefficients = [t[1] for t in sorted(G_clustering, key=lambda x: x[1], reverse=True)]
+    
+    return(nodes_by_clustering_coefficient, clustering_coefficients)
