@@ -61,3 +61,31 @@ def total_communities_scores(G):
             receveurs_score[edge_number] += edge_label #updating the score of the community
             
     return(receveurs_score)
+
+
+def positive_negative_scores(G):
+    '''Returns the total number of positive interactions for each communitiy (node) and the total number of negative interactions for each community in the form of two lists.'''
+    
+    emetteurs = np.array(G.edges())[:,0] #list of communities posting about another
+    receveurs = np.array(G.edges())[:,1] #list of communities being judged
+
+    receveurs_score_positif = np.zeros(G.number_of_nodes())  # initializing the amount of positive links to communities
+    receveurs_score_negatif = np.zeros(G.number_of_nodes())  # initializing the amount of negative links to communities
+
+    for edge_number in range(G.number_of_edges()):
+
+        edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number]) #getting the edge data of (node x, node y) in the form of a dictionary
+
+        edge_label = edge_data['POST_LABEL'] #getting the info on whether the interaction was positive or negative (+1/-1)
+
+        if edge_label == 1:
+            receveurs_score_positif[edge_number] += 1 #updating the positive score of the community
+
+        elif edge_label == -1:
+            receveurs_score_negatif[edge_number] += 1 #updating the negative score of the community
+
+        else:
+            print('Edge label not equal to -1 or 1. Edge label for edge number ', edge_number, ' is ', edge_label)
+            
+    return(receveurs_score_positif, receveurs_score_negatif)
+
