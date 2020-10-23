@@ -44,3 +44,20 @@ def clustering_coefficient(G):
     nodes_by_clustering_coefficient = [t[0] for t in sorted(G_clustering, key=lambda x: x[1], reverse=True)]
     clustering_coefficients = [t[1] for t in sorted(G_clustering, key=lambda x: x[1], reverse=True)]
     return(nodes_by_clustering_coefficient, clustering_coefficients)
+
+
+def total_communities_scores(G):
+    '''Computes the total score of each community (node) whithin the graph, where each positive link to a given community increases its score by one, and each negative link decreases its score by one'''
+    emetteurs = np.array(G.edges())[:,0] #list of communities posting about another
+    receveurs = np.array(G.edges())[:,1] #list of communities being judged
+
+    receveurs_score = np.zeros(G.number_of_nodes()))  # initializing the total scores of communities
+
+    for edge_number in range(G.number_of_edges()):
+            edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number]) #getting the edge data of (node x, node y) in the form of a dictionary
+
+            edge_label = edge_data['POST_LABEL'] #getting the info on whether the interaction was positive or negative (+1/-1)
+
+            receveurs_score[edge_number] += edge_label #updating the score of the community
+            
+    return(receveurs_score)
