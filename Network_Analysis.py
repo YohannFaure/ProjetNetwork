@@ -35,7 +35,17 @@ def degree_cut(G,mindeg,degrees=None):
     GG.remove_nodes_from([degrees[j][1] for j in range(i,len(degrees))])
     return(GG)
 
-def GraphDraw(G):
+def GraphDraw(GG):
+    pos = nx.spring_layout(GG)
+    plt.figure()    
+    nx.draw(GG,pos,edge_color='black',width=1,linewidths=1,
+        node_size=500,node_color='pink',alpha=0.9,
+        labels={node:node for node in GG.nodes()})
+    nx.draw_networkx_edge_labels(GG,pos,
+        edge_labels={edge:GG.get_edge_data(edge[0],edge[1])['POST_LABEL']
+        for edge in GG.edges()},font_color='red')
+    plt.axis('off')
+    plt.show()
     return(None)
 
 def clustering_coefficient(G):
