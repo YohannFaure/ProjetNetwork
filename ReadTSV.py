@@ -68,7 +68,10 @@ def data_to_graph(location):
     for e in edges:
         e_splited=e.split('\t')
         dic_e=dic_create(e_splited)
-        G.add_edge(e_splited[0],e_splited[1],attr=dic_e)
+        G.add_edge(e_splited[0],e_splited[1],POST_ID=dic_e['POST_ID'],
+            TIMESTAMP=dic_e['TIMESTAMP'],
+            POST_LABEL=dic_e['POST_LABEL'],
+            POST_PROPERTIES=dic_e['POST_PROPERTIES'])
     return(G)
 
 def data_to_digraph(location):
@@ -77,7 +80,7 @@ def data_to_digraph(location):
     """
     def dic_create(edge_splited):
         dic = {"POST_ID": edge_splited[2], "TIMESTAMP": edge_splited[3],
-               'POST_LABEL':edge_splited[4], 'POST_PROPERTIES':edge_splited[5]}
+               'POST_LABEL':int(edge_splited[4]), 'POST_PROPERTIES':edge_splited[5][:-2]}
         return(dic)
     f=open(location)
     lines=f.readlines()
@@ -87,5 +90,8 @@ def data_to_digraph(location):
     for e in edges:
         e_splited=e.split('\t')
         dic_e=dic_create(e_splited)
-        G.add_edge(e_splited[0],e_splited[1],attr=dic_e)
+        G.add_edge(e_splited[0],e_splited[1],POST_ID=dic_e['POST_ID'],
+            TIMESTAMP=dic_e['TIMESTAMP'],
+            POST_LABEL=dic_e['POST_LABEL'],
+            POST_PROPERTIES=dic_e['POST_PROPERTIES'])
     return(G)
