@@ -54,7 +54,8 @@ def total_communities_scores(G):
     '''
     emetteurs = np.array(G.edges())[:,0] #list of communities posting about another
     receveurs = np.array(G.edges())[:,1] #list of communities being judged
-    receveurs_score = np.zeros(G.number_of_nodes())
+    receveurs_score = dict.fromkeys(G.nodes(), 0)
+
     for edge_number in range(G.number_of_edges()):
             #getting the edge data of (node x, node y) in the form of a dictionary
             edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number])
@@ -68,20 +69,23 @@ def positive_negative_scores(G):
     '''
     Returns the total number of positive interactions for each communitiy (node)
     and the total number of negative interactions for each community in the form of two lists.
-    '''    
+    '''
     emetteurs = np.array(G.edges())[:,0] #list of communities posting about another
     receveurs = np.array(G.edges())[:,1] #list of communities being judged
-    receveurs_score_positif = np.zeros(G.number_of_nodes())
-    receveurs_score_negatif = np.zeros(G.number_of_nodes())
+
+    positive_score = dict.fromkeys(G.nodes(), 0)
+    negative_score = dict.fromkeys(G.nodes(), 0)
+
     for edge_number in range(G.number_of_edges()):
         #getting the edge data of (node x, node y) in the form of a dictionary
         edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number])
         #getting the info on whether the interaction was positive or negative (+1/-1)
         edge_label = edge_data['POST_LABEL']
         if edge_label == 1:
-            receveurs_score_positif[receveurs[edge_number]] += 1
+            positive_score[receveurs[edge_number]] += 1
         elif edge_label == -1:
-            receveurs_score_negatif[receveurs[edge_number]] += 1
+            negative_score[receveurs[edge_number]] += 1
         else:
             print('Edge label not equal to -1 or 1. Edge label for edge number ', edge_number, ' is ', edge_label)
-    return(receveurs_score_positif, receveurs_score_negatif)
+
+    return(positive_score, negative_score)
