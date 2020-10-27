@@ -3,8 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import collections
 import ReadTSV
-
+import Network_Analysis as NA
 ### Importing the graph
+
+
+G=ReadTSV('body.tsv')
+l=NA.positive_negative_scores(G)
+
 
 
 
