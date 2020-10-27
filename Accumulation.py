@@ -8,7 +8,7 @@ import Network_Analysis as NA
 
 
 G=ReadTSV.data_to_digraph('body.tsv')
-GG=NA.degree_cut(G,1000)
+GG=NA.degree_cut(G,3000)
 l=NA.positive_negative_scores(G)
 
 
