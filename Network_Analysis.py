@@ -36,7 +36,7 @@ def degree_cut(G,mindeg,degrees=None):
     return(GG)
 
 def GraphDraw(G):
-
+    return(None)
 
 def clustering_coefficient(G):
     G_clustering = nx.clustering(G)
