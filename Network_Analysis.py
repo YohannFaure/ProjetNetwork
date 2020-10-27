@@ -60,7 +60,7 @@ def total_communities_scores(G):
             edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number])
             #getting the info on whether the interaction was positive or negative (+1/-1)
             edge_label = edge_data['POST_LABEL']
-            receveurs_score[edge_number] += edge_label
+            receveurs_score[receveurs[edge_number]] += edge_label
     return(receveurs_score)
 
 
@@ -79,9 +79,9 @@ def positive_negative_scores(G):
         #getting the info on whether the interaction was positive or negative (+1/-1)
         edge_label = edge_data['POST_LABEL']
         if edge_label == 1:
-            receveurs_score_positif[edge_number] += 1
+            receveurs_score_positif[receveurs[edge_number]] += 1
         elif edge_label == -1:
-            receveurs_score_negatif[edge_number] += 1
+            receveurs_score_negatif[receveurs[edge_number]] += 1
         else:
             print('Edge label not equal to -1 or 1. Edge label for edge number ', edge_number, ' is ', edge_label)
     return(receveurs_score_positif, receveurs_score_negatif)
