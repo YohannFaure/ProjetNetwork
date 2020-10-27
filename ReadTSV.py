@@ -64,7 +64,7 @@ def data_to_graph(location):
     lines=f.readlines()
     header=lines[0]
     edges=lines[1:]
-    G = nx.Graph()
+    G = nx.MultiGraph()
     for e in edges:
         e_splited=e.split('\t')
         dic_e=dic_create(e_splited)
@@ -86,7 +86,7 @@ def data_to_digraph(location):
     lines=f.readlines()
     header=lines[0]
     edges=lines[1:]
-    G = nx.DiGraph()
+    G = nx.MultiDiGraph()
     for e in edges:
         e_splited=e.split('\t')
         dic_e=dic_create(e_splited)
