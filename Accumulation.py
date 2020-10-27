@@ -7,7 +7,7 @@ import Network_Analysis as NA
 ### Importing the graph
 
 
-G=ReadTSV('body.tsv')
+G=ReadTSV.data_to_digraph('body.tsv')
 l=NA.positive_negative_scores(G)
 
 

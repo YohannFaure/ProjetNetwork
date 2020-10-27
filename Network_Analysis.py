@@ -26,7 +26,7 @@ def Degree_distribution_plot(G):
     return(None)
 
 def degree_cut(G,mindeg,degrees=None):
-    GG=G.copy
+    GG=G.copy()
     if not degrees:
         degrees = degree_distribution(GG)
     i=0
