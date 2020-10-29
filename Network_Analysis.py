@@ -134,19 +134,18 @@ def clustering_coefficient_lists(G):
     list_clust=dict_to_sorted_lists(G_clustering)
     return([a[0] for a in list_clust],[a[1] for a in list_clust])
 
-
 def total_communities_scores(G):
     '''
     Computes the total score of each community (node) whithin the graph, where each positive
     link to a given community increases its score by one,
     and each negative link decreases its score by one
     '''
-    emetteurs = np.array(G.edges())[:,0] #list of communities posting about another
-    receveurs = np.array(G.edges())[:,1] #list of communities being judged
+    emetteurs = np.array(G.edges)[:,0] #list of communities posting about another
+    receveurs = np.array(G.edges)[:,1] #list of communities being judged
     receveurs_score = dict.fromkeys(G.nodes(), 0)
     for edge_number in range(G.number_of_edges()):
             #getting the edge data of (node x, node y) in the form of a dictionary
-            edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number])
+            edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number])[0]
             #getting the info on whether the interaction was positive or negative (+1/-1)
             edge_label = edge_data['POST_LABEL']
             receveurs_score[receveurs[edge_number]] += edge_label
@@ -158,13 +157,13 @@ def positive_negative_scores(G):
     Returns the total number of positive interactions for each communitiy (node)
     and the total number of negative interactions for each community in the form of two lists.
     '''
-    emetteurs = np.array(G.edges())[:,0] #list of communities posting about another
-    receveurs = np.array(G.edges())[:,1] #list of communities being judged
+    emetteurs = np.array(G.edges)[:,0] #list of communities posting about another
+    receveurs = np.array(G.edges)[:,1] #list of communities being judged
     positive_score = dict.fromkeys(G.nodes(), 0)
     negative_score = dict.fromkeys(G.nodes(), 0)
     for edge_number in range(G.number_of_edges()):
         #getting the edge data of (node x, node y) in the form of a dictionary
-        edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number])
+        edge_data = G.get_edge_data(emetteurs[edge_number], receveurs[edge_number])[0]
         #getting the info on whether the interaction was positive or negative (+1/-1)
         edge_label = edge_data['POST_LABEL']
         if edge_label == 1:
