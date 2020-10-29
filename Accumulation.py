@@ -9,6 +9,16 @@ import Network_Analysis as NA
 
 G=ReadTSV.data_to_digraph('body.tsv')
 GG=NA.degree_cut(G,3000)
+l,lp,ln=NA.edge_evaluation(GG)
+NA.GraphDraw(GG,-1)
+
+
+_,l1,l2=NA.edge_evaluation(G)
+weight={i:l1[i]-l2[i] for i in l1}
+GGG=NA.MultigraphToGraph(G,weight)
+
+
+
 l=NA.positive_negative_scores(GG)
 
 
