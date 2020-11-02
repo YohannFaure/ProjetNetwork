@@ -88,11 +88,17 @@ def GraphDraw(GG,label_type=0):
     nx.draw(GG,pos,edge_color='black',width=1,linewidths=1,
         node_size=1000,node_color='pink',alpha=0.8,
         labels={node:node for node in GG.nodes()})
-    if type(GG)==nx.classes.multidigraph.MultiDiGraph or type(GG)==nx.classes.multidigraph.MultiGraph :
+    if type(GG)==nx.classes.multidigraph.MultiDiGraph or type(GG)==nx.classes.multigraph.MultiGraph :
         edge_labels=edge_evaluation(GG)[label_type]
     else:
-        edge_labels = {edge:GG.get_edge_data(edge[0],edge[1])['POST_LABEL']
-            for edge in GG.edges()}    
+        try:
+            edge_labels = {edge:GG.get_edge_data(edge[0],edge[1])['POST_LABEL']
+             for edge in GG.edges()}
+        except KeyError:
+            edge_labels = {edge:GG.get_edge_data(edge[0],edge[1])['weight']
+             for edge in GG.edges()}
+        except:
+            edge_labels = {edge:1 for edge in GG.edges()}
     nx.draw_networkx_edge_labels(GG,pos, edge_labels=edge_labels,font_color='red',label_pos=.2)
     plt.axis('off')
     plt.show()
@@ -103,10 +109,11 @@ def GraphDraw(GG,label_type=0):
 def MultigraphToGraph(G,weight=None):
     """
     Converts a Multi(Di)Graph into a (Di)Graph.
+    weight is a dictionnary supposed to hold each new edge only once as a key.
     """
     if type(G)==nx.classes.multidigraph.MultiDiGraph :
         GG = nx.DiGraph()
-    elif type(G)==nx.classes.multidigraph.MultiGraph :
+    elif type(G)==nx.classes.multigraph.MultiGraph :
         GG = nx.Graph()
     else:
         raise Exception("Not suported data type : {}".format(type(GG)))
@@ -115,10 +122,41 @@ def MultigraphToGraph(G,weight=None):
             w=1
         else:
             w = weight[(u,v)]
-        if GG.has_edge(u,v):
-            GG[u][v]['weight'] += w
-        else:
+        if not GG.has_edge(u,v):
             GG.add_edge(u, v, weight=w)
+    return(GG)
+
+def DiGraphToGraph(G,weight=None):
+    """
+    converts a (multiple) Directed graph into a normal graph
+    """
+    if type(G)!=nx.classes.digraph.DiGraph and type(G)!=nx.classes.multidigraph.MultiDiGraph :
+        raise Exception("Not suported data type : {}".format(type(GG)))
+    GG = nx.Graph()
+    for u,v in G.edges():
+        if not weight:
+            w=1
+        else:
+            if not GG.has_edge(u,v):
+                try:
+                    w = weight[(u,v)]+weight[(v,u)]
+                except:
+                    w = weight[(u,v)]
+                GG.add_edge(u, v, weight=w)
+    return(GG)
+
+def SingleSignEdgesOnly(G,sign=1):
+    """
+    Takes a Multi(di)Graph as input.
+    Returns a Multi(di)Graph with only the positive (resp. negative) edges, if sign = 1 (resp. -1).
+    """
+    GG=nx.classes.multidigraph.MultiDiGraph()
+    if sign not in [-1,1]:
+        raise Exception("Bad sign argument : {}".format(sign))
+    Edges_Dict = nx.get_edge_attributes(G,'POST_LABEL')
+    for e in Edges_Dict:
+        if Edges_Dict[e]==sign:
+            GG.add_edge(e[0],e[1],POST_LABEL=1)
     return(GG)
 
 

@@ -9,8 +9,16 @@ import Network_Analysis as NA
 
 G=ReadTSV.data_to_digraph('body.tsv')
 GG=NA.degree_cut(G,3000)
+
 l,lp,ln=NA.edge_evaluation(GG)
 NA.GraphDraw(GG,-1)
+GGG=NA.DiGraphToGraph(GG,ln)
+NA.GraphDraw(GGG)
+
+
+GGGG=NA.SingleSignEdgesOnly(GG,-1)
+NA.GraphDraw(GG,-1)
+NA.GraphDraw(GGGG,-1)
 
 
 _,l1,l2=NA.edge_evaluation(G)
