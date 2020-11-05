@@ -11,6 +11,8 @@ Katz centrality : ?
 community detection ?
     example : if undirected positive graph, detect the circlejerk (= communities that love eachother), if undirected negative, detect the shitstorm groups.
 
-Node similarity ?
+Node similarity ? Assortativity/homophily    VS    Disassortativity
 
-function MultiDiGraph to Graph.
+degree assortativity
+
+Modularity
