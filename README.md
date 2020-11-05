@@ -1,27 +1,62 @@
 # ProjetNetwork
+*Flora Gaudillère*  
+*Yohann Faure*
 
-The goal here is to make some data analysis on graphs. The graph we will focus on can be found [here](https://networks.skewed.de/net/power#None_draw).
 
-```
-D.J. Watts and S.H. Strogatz, "Collective dynamics of 'small-world' networks." Nature 393, 440-442 (1998)., http://www.nature.com/nature/journal/v393/n6684/abs/393440a0.html
-```
 
-Our **main goal** is to design an attack on the power grid in order to cut power to as many nodes as possible with as little efforts as possible.
+This project aims at studying an interaction graph in the social network [reddit](https://www.reddit.com/). The data used can be found [here](http://snap.stanford.edu/data/soc-RedditHyperlinks.html).[^1]
 
-The idea behind such an attack preparation is to show the discrepancies of the system, and to create a protection or redundancy plan.
+[^1]: S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018.
 
-## File conversion
 
-We will first work on the data conversion, _i.e._ converting the original file type (_.gml_) into some NetworkX understandable data.
+Our **main goal** is to get familiar with the data structure**s** offered by `Networkx`, and to implement simple algorithms over said structures.
 
-Lucky us, it is a simple enough task, networkx has a built-in function to do that.
 
-```
-G=nx.read_gml("power.gml",label='id')
-```
+[TOC]
 
-> **Note:** We decided to create a tool to read `.tsv` files, as our first network choice was different. This could be useful if we ever need to read a `.tsv` graph at some point. The module associated with that is named `ReadTSV.py`. The graph associated can be found [here](http://snap.stanford.edu/data/soc-RedditHyperlinks.html)
+
+
+---
+
+## Understanding the data
+
+### How reddit works
+
+In a nutshell, Reddit allows users to create communities, dedicated to a specific topic, named *subreddits*, designed by r/their name. For example the subreddit `r/cats` talks about cats. In a given community, one can then post images, text, or links, and redditors (the users of reddit) can then either upvote (like) ou downvote (dislike) the post.
+
+### What's in the data
+
+The network represents the directed connections between two subreddits, a connection being a post containing a direct hyperlink to an other subreddit. The network is extracted from publicly available Reddit data of 2.5 years from Jan 2014 to April 2017.
+
+Each hyperlink is annotated with a value named `POST_LABEL`, which can either be $-1$ or $+1$, and that reflects the sentiment of the source post towards the target post. $-1$ means the source community is negatively judging the target, while $+1$ means the source is positively judging the target.
+
+The way such label has been put onto every post is detailed in [this study](http://snap.stanford.edu/conflict/), but basically, it is done using Deep Learning.
+
+The network is, by essence, directed, temporal, and attributed.
+
+
+## File conversion : `ReadTSV.py`
+
+First, we have to work on the data conversion, *i.e.* converting the original data, stored in a `.tsv` file into some NetworkX understandable format.
+
+To do so, we created a python module composed of a few key functions, made specifically for this `.tsv` file format, and specialized for our data.
+
+### Introducing MultiGraphs
+
+The first attempt at reading the data let to edges being multiple times written, because 
+
+
 
 ## Information gathering
 
 We need to find information about the graph.
+
+
+```abc
+X:1
+T:La Patrouille des Éléphants
+M:4/4
+C:Disney
+K:F
+A1/2^G1/2 |: AF FF F3/2 A1/2^G1/2 | AF EF G3/2 B1/2A1/2| B GG B1/2A1/2 B GGz|
+c2c2c2z c1/2c1/2 | cB AG c3/2 c1/2c1/2 | cB AG F3/2 A1/2^G1/2 :|
