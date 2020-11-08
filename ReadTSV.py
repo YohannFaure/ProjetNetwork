@@ -57,7 +57,7 @@ def data_to_graph(location):
     Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a graph.
     """
     def dic_create(edge_splited):
-        dic = {"POST_ID": edge_splited[2], "TIMESTAMP": edge_splited[3],
+        dic = {"POST_ID": edge_splited[2][:-1], "TIMESTAMP": edge_splited[3],
                'POST_LABEL':edge_splited[4], 'POST_PROPERTIES':edge_splited[5]}
         return(dic)
     f=open(location)
@@ -79,7 +79,7 @@ def data_to_digraph(location):
     Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a graph.
     """
     def dic_create(edge_splited):
-        dic = {"POST_ID": edge_splited[2], "TIMESTAMP": edge_splited[3],
+        dic = {"POST_ID": edge_splited[2][:-1], "TIMESTAMP": edge_splited[3],
                'POST_LABEL':int(edge_splited[4]), 'POST_PROPERTIES':edge_splited[5][:-2]}
         return(dic)
     f=open(location)
