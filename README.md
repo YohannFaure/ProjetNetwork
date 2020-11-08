@@ -4,12 +4,8 @@
 
 
 
-This project aims at studying an interaction graph in the social network [reddit](https://www.reddit.com/)[^joke]. The data used can be found [here](http://snap.stanford.edu/data/soc-RedditHyperlinks.html).[^citation]
+This project aims at studying an interaction graph in the social network [reddit](https://www.reddit.com/)<sup id="a1">[1](#f1)</sup>. The data used can be found [here](http://snap.stanford.edu/data/soc-RedditHyperlinks.html).<sup id="a2">[2](#f2)</sup>
 
-
-[^joke]: Let's be honnest, this whole Master is just an excuse to spend hours on social networks every day.
-
-[^citation]: S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018.
 
 
 Our **main goal** is to get familiar with the data structure**s** offered by `Networkx`, and to implement simple algorithms over said structures.
@@ -127,3 +123,11 @@ Let's plot it, using `NA.GraphDraw`. This function has a second argument that al
 ![GraphDraw1](./figures/GraphDraw1.png)
 ![GraphDraw2](./figures/GraphDraw2.png)
 
+
+
+
+
+
+<b id="f1">1</b> Let's be honnest, this whole Master is just an excuse to spend hours on social networks every day. [↩](#a1)
+
+<b id="f2">2</b> S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018. [↩](#a2)
