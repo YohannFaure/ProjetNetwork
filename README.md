@@ -27,7 +27,7 @@ Our **main goal** is to get familiar with the data structure**s** offered by `Ne
 
 In a nutshell, Reddit allows users to create communities, dedicated to a specific topic, named *subreddits*, designed by `r/their name`. For example the subreddit `r/cats` talks about cats. In a given community, one can then post images, text, or links, and redditors (the users of reddit) can then either upvote (like) ou downvote (dislike) the post.
 
-### 1.2 - What's in the data
+### 1.2 - What is in the data
 
 The network represents the directed connections between two subreddits, a connection being a post containing a direct hyperlink to an other subreddit. The network is extracted from publicly available Reddit data of 2.5 years from Jan 2014 to April 2017.
 
@@ -99,7 +99,7 @@ In order to really understand the data structure of the graph, we fist wanted to
 
 Plotting it might therefore not be an excellent idea. The graph is indeed too large to get a proper display using Networkx standard `draw` method. We could imagine a drawing method based on a cut of the graph, for example we could select the higest degree nodes and only plot them.
 
-### 3.3 - Degree cutting
+### 2.3 - Degree cutting
 
 To cut according to the degree of the nodes, we need to find out what the distribution of the degrees is. To do so, we designed two functions called `degree_distribution`, and `Degree_distribution_plot`, that do just what their name indicate.
 
@@ -108,28 +108,22 @@ NA.Degree_distribution_plot(G)
 ```
 ![Degree_distribution_plot](./figures/Degree_distribution_plot.png)
 
+This plot is quitte interesting, as it tells us that the distribution of degrees is broad, and might be called "scale-free". Here though, this is not a caracteristic of interest, therefore we will avoid all controversy and not call it "scale-free", just "with a broad degree distribution".
 
 ### 3.4 - Ploting
 
+Now that we know that the distribution is broad, we can simply cut it on the degree, as such a cut would still preserve the overall structure of the graph, at least for visual inspection.
 
+That is what `NA.degree_cut` does. It cuts the graph to only keep the highest degree nodes. One can specify the "degrees" on which to cut, making it more of a generic cut function. For example `degree_cut(G,2000,degrees=dic)` would return a graph composed of only the nodes of `G` with a score given by the dictionnary `dic` higher than 2000.
 
+Let's plot it, using `NA.GraphDraw`. This function has a second argument that allows the selection of the interaction to plot (positive, negative, or total).
 
+```
+>>> GG=NA.degree_cut(G,2500)
+>>> NA.GraphDraw(GG,1)
+>>> NA.GraphDraw(GG,-1)
+```
 
+![GraphDraw1](./figures/GraphDraw1.png)
+![GraphDraw2](./figures/GraphDraw2.png)
 
-
-
-
-
-
-
-
-
-
-```abc
-X:1
-T:La Patrouille des Éléphants  
-M:4/4
-C:Disney
-K:F
-A1/2^G1/2 |: AF FF F3/2 A1/2^G1/2 | AF EF G3/2 B1/2A1/2| B GG B1/2A1/2 B GGz|
-c2c2c2z c1/2c1/2 | cB AG c3/2 c1/2c1/2 | cB AG F3/2 A1/2^G1/2 :|
