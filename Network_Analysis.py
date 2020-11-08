@@ -19,7 +19,7 @@ def degree_distribution(G):
     degrees = sorted([(d,n) for n, d in G.degree()], reverse=True)  # degree sequence
     return(degrees)
 
-def Degree_distribution_plot(G):
+def Degree_distribution_plot(G,show=True):
     """
     Plots the degree distribution of a graph.
     """
@@ -33,9 +33,11 @@ def Degree_distribution_plot(G):
     plt.xlabel("Degree")
     plt.xscale('log')
     plt.yscale('log')
+    plt.grid(which='both')
     #ax.set_xticks([d + 0.4 for d in deg])
     #ax.set_xticklabels(deg)
-    plt.show()
+    if show:
+        plt.show()
     return(None)
 
 def degree_cut(G,mindeg,degrees=None):
