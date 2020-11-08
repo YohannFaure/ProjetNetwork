@@ -1,4 +1,9 @@
-
+#!/usr/bin/env python3
+"""
+This document is supposed to be used to read the TSV file from
+    http://snap.stanford.edu/data/soc-RedditHyperlinks.html
+It can easilly be adapted to any tsv file.
+"""
 
 
 import networkx as nx

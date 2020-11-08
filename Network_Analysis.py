@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+"""
+This document is designed to study the data from
+    http://snap.stanford.edu/data/soc-RedditHyperlinks.html
+and imported with
+    ReadTSV.py
+It contains functions that can easilly be adapted to any Multi(Di)Graph treatment in networkx.
+"""
+
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
