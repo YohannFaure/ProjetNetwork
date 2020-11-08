@@ -235,9 +235,21 @@ def edges_multiplicity(G):
             dic[i]=1
     return(dic)
 
-def Key_Max(dic):
+def Key_Max(dic,print_values=True):
     """
-    
+    Returns the key of maximal value in the dictionnary
     """
-    return(max(dic,key=dic.get))
+    m=max(dic,key=dic.get)
+    if print_values:
+        print(m,dic[m])
+    return(m)
+
+def Key_Min(dic,print_values=True):
+    """
+    Returns the key of minimal value in the dictionnary
+    """
+    m=min(dic,key=dic.get)
+    if print_values:
+        print(m,dic[m])
+    return(m)
 

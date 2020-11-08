@@ -13,26 +13,26 @@ GG=NA.degree_cut(G,2500)
 
 
 l,lp,ln=NA.edge_evaluation(GG)
-NA.GraphDraw(GG,-1)
-GGG=NA.DiGraphToGraph(GG,ln)
+#NA.GraphDraw(GG,-1)
+#GGG=NA.DiGraphToGraph(GG,ln)
+#NA.GraphDraw(GGG)
+
+
+#GGG=NA.SingleSignEdgesOnly(GG,-1)
+#NA.GraphDraw(GG,-1)
+#NA.GraphDraw(GGG,-1)
+
+
+_,l1,l2=NA.edge_evaluation(GG)
+weight={i:l1[i]-l2[i] for i in l1}
+#GGG=NA.MultigraphToGraph(G,weight)
+GGG=NA.MultigraphToGraph(GG,l1)
 NA.GraphDraw(GGG)
 
 
-GGGG=NA.SingleSignEdgesOnly(GG,-1)
-NA.GraphDraw(GG,-1)
-NA.GraphDraw(GGGG,-1)
+positive_score, negative_score=NA.positive_negative_scores(G)
 
-
-_,l1,l2=NA.edge_evaluation(G)
-weight={i:l1[i]-l2[i] for i in l1}
-GGG=NA.MultigraphToGraph(G,weight)
-
-
-
-l=NA.positive_negative_scores(GG)
-
-
-
+total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
 
 ### Basic stuff
 
