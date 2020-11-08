@@ -9,20 +9,7 @@ import Network_Analysis as NA
 
 
 G=ReadTSV.data_to_digraph('body.tsv')
-GG=NA.degree_cut(G,3000)
-
-
-def edges_multiplicity(G):
-    dic={}
-    for i in G.edges():
-        if i in dic:
-            dic[i]+=1
-        else:
-            dic[i]=1
-    return(dic)
-
-def Key_Max(dic):
-    return(max(dic,key=dic.get))
+GG=NA.degree_cut(G,2500)
 
 
 l,lp,ln=NA.edge_evaluation(GG)

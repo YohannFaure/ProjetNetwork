@@ -110,7 +110,7 @@ def GraphDraw(GG,label_type=0):
              for edge in GG.edges()}
         except:
             edge_labels = {edge:1 for edge in GG.edges()}
-    nx.draw_networkx_edge_labels(GG,pos, edge_labels=edge_labels,font_color='red',label_pos=.2)
+    nx.draw_networkx_edge_labels(GG,pos, edge_labels=edge_labels,font_color='red',label_pos=.3)
     plt.axis('off')
     plt.show()
     return(None)
@@ -222,3 +222,22 @@ def positive_negative_scores(G):
         else:
             print('Edge label not equal to -1 or 1. Edge label for edge number ', edge_number, ' is ', edge_label)
     return(positive_score, negative_score)
+
+def edges_multiplicity(G):
+    """
+    Returns the multiplicity of the edges of a graph G
+    """
+    dic={}
+    for i in G.edges():
+        if i in dic:
+            dic[i]+=1
+        else:
+            dic[i]=1
+    return(dic)
+
+def Key_Max(dic):
+    """
+    
+    """
+    return(max(dic,key=dic.get))
+
