@@ -75,7 +75,18 @@ All the rest f the data is stored raw from the `.tsv` file in `POST_PROPERTIES`,
 
 ## 3 - Getting in touch with the data structure
 
-### 3.1 - First informations
+### 3.1 - Storing the analysis functions : `Network_Analysis.py`
+
+We  decided to group all of our functions in a single python file called `Network_Analysis.py`. This way, a simple `import Network_Analysis as NA`
+allows us to use them seamlessly in the scripts.
+
+To get details on the content of this module, feel free to use the following commands:
+```
+>>> import Network_Analysis as NA
+>>> help(NA)
+```
+
+### 3.2 - First informations
 
 In order to really understand the data structure of the graph, we fist wanted to plot it. But we had to check a few things before doing so.
 
@@ -86,14 +97,20 @@ In order to really understand the data structure of the graph, we fist wanted to
 286561
 ```
 
-Plotting it might therefore not be an excellent idea. The graph is indeed too large to get a proper display using Networkx standard `draw` method.
+Plotting it might therefore not be an excellent idea. The graph is indeed too large to get a proper display using Networkx standard `draw` method. We could imagine a drawing method based on a cut of the graph, for example we could select the higest degree nodes and only plot them.
 
-### 3.1 - First analysis functions : `Network_Analysis.py`
+### 3.3 - Degree cutting
 
-We  decided to group all of our functions in a single python file called `Network_Analysis.py`. This way, a simple `import Network_Analysis as NA`
-allows us to use them seamlessly in the scripts.
+To cut according to the degree of the nodes, we need to find out what the distribution of the degrees is. To do so, we designed two functions called `degree_distribution`, and `Degree_distribution_plot`, that do just what their name indicate.
 
-This document
+```
+NA.Degree_distribution_plot(G)
+```
+![Degree_distribution_plot](./figures/Degree_distribution_plot.png)
+
+
+### 3.4 - Ploting
+
 
 
 
