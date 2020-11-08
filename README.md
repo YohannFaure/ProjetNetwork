@@ -123,11 +123,51 @@ Let's plot it, using `NA.GraphDraw`. This function has a second argument that al
 ![GraphDraw1](./figures/GraphDraw1.png)
 ![GraphDraw2](./figures/GraphDraw2.png)
 
+### 3.5 - Converting to non-multi Graph
+
+One of the first ideas we had too was to create conversion tools to make a simple Graph out of the MultiGraph. To do so, one simply needs to use `NA.MultigraphToGraph`. It allows us to better manipulate the graph.
+
+> We also made a function to convert a Directed Graph into a simple Graph, but such manipulation looses the very essence of this dataset.
+
+## Data Analysis
+
+It is now time to answer a few questions, such as "which community recieves the most hated of all reddit?", "which community is most appreciated?", or "what community clusters can be found?".
+
+### Simple like metrics
+
+```
+>>> positive_score, negative_score=NA.positive_negative_scores(GG)
+>>> total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
+>>> most_loved = NA.Key_Max(positive_score)
+askreddit 6525
+>>> most_hated = NA.Key_Max(negative_score)
+askreddit 804
+>>> best_scoring = NA.Key_Max(total_score)
+askreddit 5721
+```
+
+The most hated, most loved, and best scoring subreddit is, without surprise, `r/askreddit`, a subreddit dedicated to asking questions about almost anything to the Reddit community.
+
+But this is not very interesting, we might want to find the second and third subreddits. After a few tribulations, the results are the following:
+
+<div style="text-align: right">
+
+| Love score | Hate score | Worst total score |
+| -------- | -------- | -------- |
+| r/askreddit 6525 | r/askreddit 804 |r/latterdaysaints -52 |
+|r/iama 3462 |r/news 484 |r/ketorecipes -31 |
+|r/pics 2533 |r/todayilearned 414 |r/femradebates -25 |
+|r/writingprompts 2454 |r/worldnews 407 |r/lifeafternarcissism -19 |
+|r/leagueoflegends 2251 |r/kotakuinaction 388 |r/nsfw_gifs -14 |
+|r/videos 2235 |r/pics 246 |r/fitnesscirclejerk -13 |
+|r/todayilearned 1957 |r/iama 232 |r/civcraftexchange -13 |
+|r/worldnews 1850 |r/showerthoughts 221 |r/triviatime -11 |
+|r/funny 1847 |r/videos 211 |r/idg0d -10 |
+|r/nfl 1381 |r/adviceanimals 208 |r/thebatmanteam -9 |
+
+</div>
 
 
+<sup id="f1">1</sup> Let's be honnest, this whole Master is just an excuse to spend hours on social networks every day. [↩](#a1)
 
-
-
-<b id="f1">1</b> Let's be honnest, this whole Master is just an excuse to spend hours on social networks every day. [↩](#a1)
-
-<b id="f2">2</b> S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018. [↩](#a2)
+<sup id="f2">2</sup> S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018. [↩](#a2)
