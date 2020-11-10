@@ -37,6 +37,11 @@ The network is, by essence, directed, temporal, and attributed.
 
 > **Note:** the date in the data is wrong. For example the datestamp of `POST_ID=34c15a`, from `r/changelog` to `r/redditdev`, is `2015-04-27`, while the real datestamp of this post is `2015-04-30`.
 
+### 1.3 - Dynamics : Interactions or relations?
+
+This data is a collection of ponctual interactions between subreddits, but studying the frequency and the value of said interactions can lead to the construction of relations, the same a a relationship between two individuals is a succession of interactions.
+
+We don't take into account the creation date of a subreddit, but such information is made available on the reference paper.
 
 ## 2 - File conversion : `ReadTSV.py`
 
@@ -59,7 +64,7 @@ In order to have a cleaner understanding of the data, and to represent this unde
 
 All the rest f the data is stored raw from the `.tsv` file in `POST_PROPERTIES`, just in case we need it, but we did not use it in this project.
 
-### 3.3 - Converting the file
+### 2.3 - Converting the file
 
 ```
 >>> import networkx as nx
@@ -133,7 +138,7 @@ One of the first ideas we had too was to create conversion tools to make a simpl
 
 It is now time to answer a few questions, such as "which community recieves the most hated of all reddit?", "which community is most appreciated?", or "what community clusters can be found?".
 
-### Simple like metrics
+### Simple reception metrics
 
 ```
 >>> positive_score, negative_score=NA.positive_negative_scores(GG)
@@ -168,6 +173,24 @@ But this is not very interesting, we might want to find the second and third sub
 </div>
 
 
+### Simple emission metrics
+
+Who are the biggest haters ?
+
+to do
+
+### General time growth of Reddit
+
+Done, to writte
+
+### Louvain
+
+to do
+
+---
+
 <sup id="f1">1</sup> Let's be honnest, this whole Master is just an excuse to spend hours on social networks every day. [↩](#a1)
 
 <sup id="f2">2</sup> S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018. [↩](#a2)
+
+
