@@ -9,6 +9,10 @@ import Network_Analysis as NA
 
 
 G=ReadTSV.data_to_digraph('body.tsv')
+l,n=NA.Time_Growth(G)
+fig=NA.Plot_Time_Growth(l,n)
+plt.show()
+
 GG=NA.degree_cut(G,2500)
 
 

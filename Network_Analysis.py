@@ -11,6 +11,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import collections
+from re import match
+import datetime
 
 def degree_distribution(G):
     """
@@ -252,4 +254,68 @@ def Key_Min(dic,print_values=True):
     if print_values:
         print(m,dic[m])
     return(m)
+
+def timestamp_to_seconds(timestamp):
+    """
+    format of timestamp: 'yyyy-mm-dd hh-mm-ss'
+    returns a standard float corresponding to the number of seconds between
+    your timestamp and '2013-12-31 15:39:58', which is the first timestamp of
+    our graph. For the record, the 0 reference of timestamp is "1970-01-01 01:00:00"
+    """
+    m=match("[0-9]{4,4}[-][01][0-9][-][0-3][0-9][ ][0-2][0-9][:][0-5][0-9][:][0-5][0-9]",timestamp)
+    b=bool(m) and len(timestamp)==19
+    if not(b):
+        raise Exception("Timestamp format should be 'yyyy-mm-dd hh-mm-ss' only.")
+    my_date = datetime.datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+    return(my_date.timestamp())
+
+def seconds_to_timestamp(seconds):
+    """
+    takes a standard float corresponding to the number of seconds between
+    your timestamp and '2013-12-31 15:39:58', which is the first timestamp of
+    our graph. For the record, the 0 reference of timestamp is "1970-01-01 01:00:00"
+    Returns timestamp, formated as: 'yyyy-mm-dd hh-mm-ss'
+    """
+    timestamp = datetime.datetime.utcfromtimestamp(seconds+1388504398.0)
+    return(str(timestamp))
+
+
+def All_Times(G):
+    """
+    Returns
+    """
+    l=[]
+    for e in G.edges.data("TIMESTAMP"):
+        l.append(timestamp_to_seconds(e[-1])-1388504398.0)
+    return(sorted(l))
+
+def Time_Growth(G):
+    list_times=All_Times(G)
+    list_numbers=list(range(len(list_times)))
+    return(list_times,list_numbers)
+
+def Plot_Time_Growth(list_times,list_numbers,time_div=5,fit=True):
+    fig=plt.figure()
+    t0=list_times[0]
+    tf=list_times[-1]
+    nf=list_numbers[-1]
+    list_times=np.array(list_times)/tf
+    list_numbers=np.array(list_numbers)/nf
+    plt.plot(list_times,list_numbers,label='Network growth',color="red",alpha=1)
+    plt.plot([list_times[0],list_times[-1]],[list_numbers[0],list_numbers[-1]],label='Linear approximation',color="green",alpha=.3)
+    plt.plot(list_times,(np.exp(list_times)-1)/(np.exp(1)-1),label='exponential approximation',color="orange",alpha=.5)
+    if fit:
+        a,b=np.polyfit(np.exp(np.array(list_times)) , list_numbers, 1 )
+        plt.plot(list_times,a*np.exp(list_times)+b,label="exponential fit",color="orange",alpha=1)
+    t_ticks=[i/time_div for i in range(time_div+1)]
+    y_ticks=[i/time_div for i in range(time_div+1)]
+    plt.xlabel('Date')
+    plt.ylabel('Total number of edges')
+    plt.xticks(t_ticks,[seconds_to_timestamp(i*tf)[:10] for i in t_ticks],rotation='vertical')
+    plt.yticks(y_ticks,[i*nf for i in y_ticks])    
+    plt.grid('both')
+    plt.legend()
+    plt.tight_layout()
+    return(fig)
+
 
