@@ -147,15 +147,15 @@ def DiGraphToGraph(G,weight=None):
         raise Exception("Not suported data type : {}".format(type(GG)))
     GG = nx.Graph()
     for u,v in G.edges():
-        if not weight:
-            w=1
-        else:
-            if not GG.has_edge(u,v):
+        if not GG.has_edge(u,v):
+            if not weight:
+                w=1
+            else:
                 try:
                     w = weight[(u,v)]+weight[(v,u)]
                 except:
                     w = weight[(u,v)]
-                GG.add_edge(u, v, weight=w)
+            GG.add_edge(u, v, weight=w)
     return(GG)
 
 def SingleSignEdgesOnly(G,sign=1):
