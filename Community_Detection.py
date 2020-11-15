@@ -79,5 +79,6 @@ def plot_community(g):
     from community import community_louvain
     partition = community_louvain.best_partition(g)
     pos = community_layout(g, partition)
-    nx.draw(g, pos, node_color=list(partition.values())); plt.show()
-    return(None)
+    nx.draw(g, pos, node_color=list(partition.values()))
+    plt.show()
+    return(partition)
