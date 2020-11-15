@@ -177,7 +177,22 @@ But this is not very interesting, we might want to find the second and third sub
 
 Who are the biggest haters ?
 
-to do
+<div style="text-align: right">
+
+| Lover score | Hater score | Worst total score |
+| -------- | -------- | -------- |
+| r/subredditdrama 3035 | r/subredditdrama 1630 |r/shitghazisays -65 |
+| r/outoftheloop 1897 | r/drama 497 | r/femrameta -56, |
+| r/circlebroke 1873 |r/circlebroke 485 |  r/mubookclub -45 |
+| r/shitliberalssay 1605 | r/copypasta 464 | r/hhcjcopypasta -30 |
+| r/hailcorporate 1479 | r/circlejerkcopypasta 375 | r/nolibswatch -30 |
+| r/writingprompts 145 | r/shitliberalssay 363 | r/iosthemes -28 |
+| r/copypasta 1360 |  r/bestofoutrageculture 309 | r/wherearethefeminists -24 |
+| r/buildapc 1303 | r/conspiracy 293 |  r/warcraftlore -18 |
+| r/tipofmypenis 1185 | r/writingprompts 251 |  r/wowcirclejerk -15 |
+| r/conspiracy 1169 | r/badhistory 219 | r/metaphotography -15 |
+
+</div>
 
 ### General time growth of Reddit
 
