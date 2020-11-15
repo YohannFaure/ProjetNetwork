@@ -175,8 +175,9 @@ But this is not very interesting, we might want to find the second and third sub
 
 ### Simple emission metrics
 
-Who are the biggest haters ?
+Conversely, we might ask ourselves what are the communities that judge others most positively or negatively. 
 
+Unsurprisingly, the subreddit with both the highest positive and negative judgement scores is r/subredditdrama, a community dedicated to judging other subreddits (we might add, on a positive note, that the positive judgements outweight the negatives ones by a very large margin). Subreddits such as r/drama, r/bestofoutrageculture or r/badhistory are also a communities that we could expect to find in the communities with the highest negative judgement scores. 
 <div style="text-align: right">
 
 | Lover score | Hater score | Worst total score |
