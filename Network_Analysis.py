@@ -225,6 +225,49 @@ def positive_negative_scores(G):
             print('Edge label not equal to -1 or 1. Edge label for edge number ', edge_number, ' is ', edge_label)
     return(positive_score, negative_score)
 
+
+
+def total_communities_scores_emitter(G):
+    '''
+    Computes the total emitting score of each community (node) whithin the graph, where each positive
+    link to a another community from a given community increases its score by one,
+    and each negative link decreases its score by one
+    '''
+    emitters = np.array(G.edges)[:,0] #list of communities posting about another
+    receivers = np.array(G.edges)[:,1] #list of communities being judged
+    emitter_score = dict.fromkeys(G.nodes(), 0)
+    for edge_number in range(G.number_of_edges()):
+            #getting the edge data of (node x, node y) in the form of a dictionary
+            edge_data = G.get_edge_data(emitters[edge_number], receivers[edge_number])[0]
+            #getting the info on whether the interaction was positive or negative (+1/-1)
+            edge_label = edge_data['POST_LABEL']
+            emitter_score[emitters[edge_number]] += edge_label
+    return(emitter_score)
+
+
+def positive_negative_scores_emitters(G):
+    '''
+    Returns the total number of positive interactions emitted by each communitiy (node)
+    and the total number of negative interactions emitted by each community in the form of two dictionaries.
+    '''
+    emitters = np.array(G.edges)[:,0] #list of communities posting about another
+    receivers = np.array(G.edges)[:,1] #list of communities being judged
+    positive_score = dict.fromkeys(G.nodes(), 0)
+    negative_score = dict.fromkeys(G.nodes(), 0)
+    for edge_number in range(G.number_of_edges()):
+        #getting the edge data of (node x, node y) in the form of a dictionary
+        edge_data = G.get_edge_data(emitters[edge_number], receivers[edge_number])[0]
+        #getting the info on whether the interaction was positive or negative (+1/-1)
+        edge_label = edge_data['POST_LABEL']
+        if edge_label == 1:
+            positive_score[emitters[edge_number]] += 1
+        elif edge_label == -1:
+            negative_score[emitters[edge_number]] += 1
+        else:
+            print('Edge label not equal to -1 or 1. Edge label for edge number ', edge_number, ' is ', edge_label)
+    return(positive_score, negative_score)
+
+
 def edges_multiplicity(G):
     """
     Returns the multiplicity of the edges of a graph G
