@@ -301,12 +301,18 @@ def Plot_Time_Growth(list_times,list_numbers,time_div=5,fit=True):
     nf=list_numbers[-1]
     list_times=np.array(list_times)/tf
     list_numbers=np.array(list_numbers)/nf
-    plt.plot(list_times,list_numbers,label='Network growth',color="red",alpha=1)
-    plt.plot([list_times[0],list_times[-1]],[list_numbers[0],list_numbers[-1]],label='Linear approximation',color="green",alpha=.3)
-    plt.plot(list_times,(np.exp(list_times)-1)/(np.exp(1)-1),label='exponential approximation',color="orange",alpha=.5)
+    plt.plot(list_times,list_numbers,label='Network growth',color="red",alpha=1,linewidth=4, linestyle=':')
+    plt.plot([list_times[0],list_times[-1]],[list_numbers[0],list_numbers[3000]*list_times[-1]/(list_times[3000]-list_times[0])],label='Linear approximation',color="orange",alpha=.5)
+    plt.plot(list_times,(np.exp(list_times)-1)/(np.exp(1)-1),label='exponential approximation',color="green",alpha=1)
     if fit:
-        a,b=np.polyfit(np.exp(np.array(list_times)) , list_numbers, 1 )
-        plt.plot(list_times,a*np.exp(list_times)+b,label="exponential fit",color="orange",alpha=1)
+        #a,b=np.polyfit(np.exp(np.array(list_times)) , list_numbers, 1 )
+        #plt.plot(list_times,a*np.exp(list_times)+b,label="exponential fit",color="orange",alpha=1)
+        from scipy.optimize import curve_fit
+        def func_powerlaw(x, m, c, c0):
+            return c0 + x**m * c
+        target_func = func_powerlaw
+        popt, pcov = curve_fit(target_func, list_times, list_numbers)
+        plt.plot(list_times,target_func(list_times,*popt), label=r"Powerlaw fit, $\alpha=${:.2f}".format(popt[0]), color="blue", alpha=1)
     t_ticks=[i/time_div for i in range(time_div+1)]
     y_ticks=[i/time_div for i in range(time_div+1)]
     plt.xlabel('Date')
