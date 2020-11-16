@@ -25,7 +25,7 @@ In a nutshell, Reddit allows users to create communities, dedicated to a specifi
 
 ### 1.2 - What is in the data
 
-The network represents the directed connections between two subreddits, a connection being a post containing a direct hyperlink to an other subreddit. The network is extracted from publicly available Reddit data of 2.5 years from Jan 2014 to April 2017.
+The network represents the directed connections between two subreddits, a connection being a post containing a direct hyperlink to an other subreddit. The network is extracted from publicly available Reddit data of 2 years and a half, from January 2014 ($t_0$) to April 2017 ($t_f$).
 
 <a name="POST_LABEL"></a>
 
@@ -66,7 +66,7 @@ All the rest f the data is stored raw from the `.tsv` file in `POST_PROPERTIES`,
 
 ### 2.3 - Converting the file
 
-```
+```python3
 >>> import networkx as nx
 >>> import ReadTSV
 >>> G=ReadTSV.data_to_digraph('body.tsv')
@@ -82,7 +82,7 @@ We  decided to group all of our functions in a single python file called `Networ
 allows us to use them seamlessly in the scripts.
 
 To get details on the content of this module, feel free to use the following commands:
-```
+```python3
 >>> import Network_Analysis as NA
 >>> help(NA)
 ```
@@ -91,7 +91,7 @@ To get details on the content of this module, feel free to use the following com
 
 In order to really understand the data structure of the graph, we fist wanted to plot it. But we had to check a few things before doing so.
 
-```
+```python3
 >>> len(G.nodes)
 35776
 >>> len(G.edges)
@@ -100,12 +100,12 @@ In order to really understand the data structure of the graph, we fist wanted to
 
 Plotting it might therefore not be an excellent idea. The graph is indeed too large to get a proper display using Networkx standard `draw` method. We could imagine a drawing method based on a cut of the graph, for example we could select the higest degree nodes and only plot them.
 
-### 2.3 - Degree cutting
+### 3.3 - Degree cutting
 
 To cut according to the degree of the nodes, we need to find out what the distribution of the degrees is. To do so, we designed two functions called `degree_distribution`, and `Degree_distribution_plot`, that do just what their name indicate.
 
-```
-NA.Degree_distribution_plot(G)
+```python3
+>>> NA.Degree_distribution_plot(G)
 ```
 ![Degree_distribution_plot](./figures/Degree_distribution_plot.png)
 
@@ -119,7 +119,7 @@ That is what `NA.degree_cut` does. It cuts the graph to only keep the highest de
 
 Let's plot it, using `NA.GraphDraw`. This function has a second argument that allows the selection of the interaction to plot (positive, negative, or total).
 
-```
+```python3
 >>> GG=NA.degree_cut(G,2500)
 >>> NA.GraphDraw(GG,1)
 >>> NA.GraphDraw(GG,-1)
@@ -140,7 +140,7 @@ It is now time to answer a few questions, such as "which community recieves the 
 
 ### Simple reception metrics
 
-```
+```python3
 >>> positive_score, negative_score=NA.positive_negative_scores(GG)
 >>> total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
 >>> most_loved = NA.Key_Max(positive_score)
@@ -175,29 +175,34 @@ But this is not very interesting, we might want to find the second and third sub
 
 ### Simple emission metrics
 
-Conversely, we might ask ourselves what are the communities that judge others most positively or negatively. 
+Who are the biggest haters ?
 
-Unsurprisingly, the subreddit with both the highest positive and negative judgement scores is r/subredditdrama, a community dedicated to judging other subreddits (we might add, on a positive note, that the positive judgements outweight the negatives ones by a very large margin). Subreddits such as r/drama, r/bestofoutrageculture or r/badhistory are also a communities that we could expect to find in the communities with the highest negative judgement scores. 
-<div style="text-align: right">
+to do
 
-| Lover score | Hater score | Worst total score |
-| -------- | -------- | -------- |
-| r/subredditdrama 3035 | r/subredditdrama 1630 |r/shitghazisays -65 |
-| r/outoftheloop 1897 | r/drama 497 | r/femrameta -56, |
-| r/circlebroke 1873 |r/circlebroke 485 |  r/mubookclub -45 |
-| r/shitliberalssay 1605 | r/copypasta 464 | r/hhcjcopypasta -30 |
-| r/hailcorporate 1479 | r/circlejerkcopypasta 375 | r/nolibswatch -30 |
-| r/writingprompts 145 | r/shitliberalssay 363 | r/iosthemes -28 |
-| r/copypasta 1360 |  r/bestofoutrageculture 309 | r/wherearethefeminists -24 |
-| r/buildapc 1303 | r/conspiracy 293 |  r/warcraftlore -18 |
-| r/tipofmypenis 1185 | r/writingprompts 251 |  r/wowcirclejerk -15 |
-| r/conspiracy 1169 | r/badhistory 219 | r/metaphotography -15 |
-
-</div>
+| tablo | coucou |
+| ----- | ------ |
+| lol   | mdr    |
+| hihi  | hoho   |
 
 ### General time growth of Reddit
 
-Done, to writte
+One of the interesting things about network is their growth. We can use this data to evaluate how fast Reddit has grown in this time scale. The basic hypothesis we made here is that the number of posts in an amount of time is proportional to the number of active members of the social network.
+
+On the following graph, we represented in dashed lines the actual number of posts in fonction of time. The yellow line corresponds to the expected shape of such number if the nuber of users was constant. It is obtained by simply approximating the curve by its tangeant at $t=t_0$. The green line is an exponential approximation of the curve, with initial and final numbers of posts fixed. Finaly the blue cruve is a powerlaw fit.
+
+![GraphDraw2](./figures/Plot_Time_Growth.png)
+
+The result here is that the powerlaw fit is clearly a better one than an exponential one. It is interesting in itself to make predictions on the growth of Reddit, in order to prepare its infrastucture for the future, for example, but it might be interesting to compare that to the number of nodes, *i.e.* the number of subreddits.
+
+If we had all Subreddits creation date, we could compare $N(t)$ the number of subreddits to $E(t)$ the number of posts referencing them, and compute a *Densification exponent*<sup id="a3">[3](#f3)</sup> $\alpha$ (if any). Such exponent exists if there is a law:
+
+$$
+E(t)\propto N(t)^\alpha
+$$
+
+In that case, usually, $1<\alpha<2$, 1 corresponding to a tree (the minimum for the network to be convex, and therefore studied as one single network instead of two separate networks), and 2 corresponding to a clique. In our case, such exponent could be over 2 as the graph is a MultiGraph, each node can be (and usually is) connected twice or more to the same other node.
+
+
 
 ### Louvain
 
@@ -208,5 +213,7 @@ to do
 <sup id="f1">1</sup> Let's be honnest, this whole Master is just an excuse to spend hours on social networks every day. [↩](#a1)
 
 <sup id="f2">2</sup> S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018. [↩](#a2)
+
+<sup id="f3">3</sup> J. Leskovec, J. Kleinberg, C. Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations, 2005. [↩](#a3)
 
 
