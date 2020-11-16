@@ -196,9 +196,9 @@ The result here is that the powerlaw fit is clearly a better one than an exponen
 
 If we had all Subreddits creation date, we could compare $N(t)$ the number of subreddits to $E(t)$ the number of posts referencing them, and compute a *Densification exponent*<sup id="a3">[3](#f3)</sup> $\alpha$ (if any). Such exponent exists if there is a law:
 
-$$
+```math
 E(t)\propto N(t)^\alpha
-$$
+```
 
 In that case, usually, $1<\alpha<2$, 1 corresponding to a tree (the minimum for the network to be convex, and therefore studied as one single network instead of two separate networks), and 2 corresponding to a clique. In our case, such exponent could be over 2 as the graph is a MultiGraph, each node can be (and usually is) connected twice or more to the same other node.
 
