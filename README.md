@@ -134,14 +134,16 @@ One of the first ideas we had too was to create conversion tools to make a simpl
 
 > We also made a function to convert a Directed Graph into a simple Graph, but such manipulation looses the very essence of this dataset.
 
-## Data Analysis
+## 4 - Data Analysis
 
 It is now time to answer a few questions, such as "which community recieves the most hated of all reddit?", "which community is most appreciated?", or "what community clusters can be found?".
 
-### Simple reception metrics
+### 4.1 - Simple reception metrics
+
+We designed a set of function to find out the most loved and hated subreddits. Their usage goes as follows :
 
 ```python3
->>> positive_score, negative_score=NA.positive_negative_scores(GG)
+>>> positive_score, negative_score=NA.positive_negative_scores(G)
 >>> total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
 >>> most_loved = NA.Key_Max(positive_score)
 askreddit 6525
@@ -173,17 +175,32 @@ But this is not very interesting, we might want to find the second and third sub
 </div>
 
 
-### Simple emission metrics
+### 4.2 - Simple emission metrics
 
-Conversely, we might ask ourselves what are the communities that judge others most positively or negatively. 
+Conversely, we might ask ourselves what are the communities that judge others most positively or negatively.
 
-Unsurprisingly, the subreddit with both the highest positive and negative judgement scores is r/subredditdrama, a community dedicated to judging other subreddits (we might add, on a positive note, that the positive judgements outweight the negatives ones by a very large margin). Subreddits such as r/drama, r/bestofoutrageculture or r/badhistory are also a communities that we could expect to find in the communities with the highest negative judgement scores. 
+```python3
+>>> positive_score, negative_score=NA.positive_negative_scores(G)
+>>> total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
+>>> most_loved = NA.Key_Max(positive_score)
+subredditdrama 3035
+>>> most_hated = NA.Key_Max(negative_score)
+subredditdrama 1630
+>>> best_scoring = NA.Key_Max(total_score)
+outoftheloop 1836
+```
+
+
+Unsurprisingly, the subreddit with both the highest positive and negative judgement scores is `r/subredditdrama`, a community dedicated to judging other subreddits (we might add, on a positive note, that the positive judgements outweight the negatives ones by a very large margin). 
+
+Subreddits such as `r/drama`, `r/bestofoutrageculture` or `r/badhistory` are also a communities that we could expect to find in the communities with the highest negative judgement scores.
+
 <div style="text-align: right">
 
 | Lover score | Hater score | Worst total score |
 | -------- | -------- | -------- |
 | r/subredditdrama 3035 | r/subredditdrama 1630 |r/shitghazisays -65 |
-| r/outoftheloop 1897 | r/drama 497 | r/femrameta -56, |
+| r/outoftheloop 1897 | r/drama 497 | r/femrameta -56 |
 | r/circlebroke 1873 |r/circlebroke 485 |  r/mubookclub -45 |
 | r/shitliberalssay 1605 | r/copypasta 464 | r/hhcjcopypasta -30 |
 | r/hailcorporate 1479 | r/circlejerkcopypasta 375 | r/nolibswatch -30 |
@@ -192,10 +209,17 @@ Unsurprisingly, the subreddit with both the highest positive and negative judgem
 | r/buildapc 1303 | r/conspiracy 293 |  r/warcraftlore -18 |
 | r/tipofmypenis 1185 | r/writingprompts 251 |  r/wowcirclejerk -15 |
 | r/conspiracy 1169 | r/badhistory 219 | r/metaphotography -15 |
-
 </div>
 
-### General time growth of Reddit
+> Some results are a bit surprising, as for example `r/hailcorporate` appears to be a loving community. Yet the description of the subreddit is
+> > /r/HailCorporate is to document times when people act as unwitting advertisers for a product as well as to document what appear to be legitimate adverts via [native advertising](https://en.wikipedia.org/wiki/Native_advertising).
+>
+> After an inspection of it's content, it clearly is a denunciation subreddit, and therefore should have a high Hater Score. For example the post with id [4isap0](reddit.com/r/HailCorporate/comments/4isap0/only_24_hrs_after_the_reddit_logo_is_replaced_by/) is clearly a negative one. It denunciates the use of native advertising to artificially boost the rating of the first Deadpool movie. Yet, it has a positive `POST_LABEL`, which means it is supposed to be a positive review.
+> 
+> More details on that issue [later](#5-critical-analysis-of-the-data).
+
+
+### 4.3 - General time growth of Reddit
 
 One of the interesting things about network is their growth. We can use this data to evaluate how fast Reddit has grown in this time scale. The basic hypothesis we made here is that the number of posts in an amount of time is proportional to the number of active members of the social network.
 
@@ -218,6 +242,24 @@ In that case, usually, $1<\alpha<2$, 1 corresponding to a tree (the minimum for 
 ### Louvain
 
 to do
+
+
+## 5 - Critical analysis of the data
+
+### 5.1 - Flawed Cases
+
+As mentionned earlier, the dataset appears not to be perfect, and some evaluations of positiveness or negativeness for posts are flawed. We mentionned the example of `r/HailCorporate` being a mostly negative subreddit yet having a mostly positive Emission score. This is not the only case we can find. `r/ShitLiberalsSay`, dedicated to the criticism of Liberal (~centrist) political views in the US, is mainly composed of users with Left Wing opinions. Yet only 6 out of its 24 references to `r/The_Donald` (a banned subreddit in support of D. Trump) are considered negative.
+
+Similarly, in `r/HateSubsInAction`, dedicated to judging the most hatefull subreddits (racism, bigotry, etc.), we can find a positive review of `r/The_Donald`. This review is obviously negative ([4mbmlx](reddit.com/r/HateSubsInAction/comments/4mbmlx/fun_soviet_reactionary_thread_on_the_donald/)), but it is considered as positive.
+
+### 5.2 - A proposition of explanation
+
+After diving into the depth of Reddit, and following the most suspicious results of our study, we found out that it was almost almost impossible to find a false negative review of a subreddit, while false positive are all around the corner.
+
+Our interpretation is that the Neural Network used to determine the positivity of a post developped a very high treshold for negative reviews, considering something negative only when very explicit caracteristics appeared. Therefore, the results of community detection using the positive scores can be highly misleading, sorting together `r/The_Donald` and `r/Democrats` for example!
+
+
+
 
 ---
 
