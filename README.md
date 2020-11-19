@@ -213,6 +213,7 @@ Subreddits such as `r/drama`, `r/bestofoutrageculture` or `r/badhistory` are als
 | r/buildapc 1303 | r/conspiracy 293 |  r/warcraftlore -18 |
 | r/tipofmypenis 1185 | r/writingprompts 251 |  r/wowcirclejerk -15 |
 | r/conspiracy 1169 | r/badhistory 219 | r/metaphotography -15 |
+
 </div>
 
 > Some results are a bit surprising, as for example `r/hailcorporate` appears to be a loving community. Yet the description of the subreddit is
@@ -220,7 +221,7 @@ Subreddits such as `r/drama`, `r/bestofoutrageculture` or `r/badhistory` are als
 >
 > After an inspection of it's content, it clearly is a denunciation subreddit, and therefore should have a high Hater Score. For example the post with id [4isap0](http://www.reddit.com/r/HailCorporate/comments/4isap0/only_24_hrs_after_the_reddit_logo_is_replaced_by/) is clearly a negative one. It denunciates the use of native advertising to artificially boost the rating of the first Deadpool movie. Yet, it has a positive `POST_LABEL`, which means it is supposed to be a positive review.
 > 
-> More details on that issue [later](#5-critical-analysis-of-the-data).
+> More details on that issue [later](#5---Critical-analysis-of-the-data).
 
 
 ### 4.3 - General time growth of Reddit
@@ -247,7 +248,6 @@ In that case, usually, $1<\alpha<2$, 1 corresponding to a tree (the minimum for 
 ### Louvain
 
 to do
-
 
 ## 5 - Critical analysis of the data
 
