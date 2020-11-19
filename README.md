@@ -66,7 +66,7 @@ All the rest f the data is stored raw from the `.tsv` file in `POST_PROPERTIES`,
 
 ### 2.3 - Converting the file
 
-```python3
+```python
 >>> import networkx as nx
 >>> import ReadTSV
 >>> G=ReadTSV.data_to_digraph('body.tsv')
@@ -82,7 +82,7 @@ We  decided to group all of our functions in a single python file called `Networ
 allows us to use them seamlessly in the scripts.
 
 To get details on the content of this module, feel free to use the following commands:
-```python3
+```python
 >>> import Network_Analysis as NA
 >>> help(NA)
 ```
@@ -91,7 +91,7 @@ To get details on the content of this module, feel free to use the following com
 
 In order to really understand the data structure of the graph, we fist wanted to plot it. But we had to check a few things before doing so.
 
-```python3
+```python
 >>> len(G.nodes)
 35776
 >>> len(G.edges)
@@ -104,10 +104,12 @@ Plotting it might therefore not be an excellent idea. The graph is indeed too la
 
 To cut according to the degree of the nodes, we need to find out what the distribution of the degrees is. To do so, we designed two functions called `degree_distribution`, and `Degree_distribution_plot`, that do just what their name indicate.
 
-```python3
+```python
 >>> NA.Degree_distribution_plot(G)
 ```
-![Degree_distribution_plot](./figures/Degree_distribution_plot.png)
+
+![Degree_distribution_plot](https://i.imgur.com/7hfJUBq.png)
+
 
 This plot is quitte interesting, as it tells us that the distribution of degrees is broad, and might be called "scale-free". Here though, this is not a caracteristic of interest, therefore we will avoid all controversy and not call it "scale-free", just "with a broad degree distribution".
 
@@ -119,14 +121,16 @@ That is what `NA.degree_cut` does. It cuts the graph to only keep the highest de
 
 Let's plot it, using `NA.GraphDraw`. This function has a second argument that allows the selection of the interaction to plot (positive, negative, or total).
 
-```python3
+```python
 >>> GG=NA.degree_cut(G,2500)
 >>> NA.GraphDraw(GG,1)
 >>> NA.GraphDraw(GG,-1)
 ```
 
-![GraphDraw1](./figures/GraphDraw1.png)
-![GraphDraw2](./figures/GraphDraw2.png)
+![GraphDraw1](https://i.imgur.com/C3HckCv.png)
+
+![GraphDraw2](https://i.imgur.com/jW9PB1L.png)
+
 
 ### 3.5 - Converting to non-multi Graph
 
@@ -142,7 +146,7 @@ It is now time to answer a few questions, such as "which community recieves the 
 
 We designed a set of function to find out the most loved and hated subreddits. Their usage goes as follows :
 
-```python3
+```python
 >>> positive_score, negative_score=NA.positive_negative_scores(G)
 >>> total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
 >>> most_loved = NA.Key_Max(positive_score)
@@ -179,7 +183,7 @@ But this is not very interesting, we might want to find the second and third sub
 
 Conversely, we might ask ourselves what are the communities that judge others most positively or negatively.
 
-```python3
+```python
 >>> positive_score, negative_score=NA.positive_negative_scores(G)
 >>> total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
 >>> most_loved = NA.Key_Max(positive_score)
@@ -225,7 +229,8 @@ One of the interesting things about network is their growth. We can use this dat
 
 On the following graph, we represented in dashed lines the actual number of posts in fonction of time. The yellow line corresponds to the expected shape of such number if the nuber of users was constant. It is obtained by simply approximating the curve by its tangeant at $t=t_0$. The green line is an exponential approximation of the curve, with initial and final numbers of posts fixed. Finaly the blue cruve is a powerlaw fit.
 
-![GraphDraw2](./figures/Plot_Time_Growth.png)
+![Plot_Time_Growth](https://i.imgur.com/l9Xvbhj.png)
+
 
 The result here is that the powerlaw fit is clearly a better one than an exponential one. It is interesting in itself to make predictions on the growth of Reddit, in order to prepare its infrastucture for the future, for example, but it might be interesting to compare that to the number of nodes, *i.e.* the number of subreddits.
 
