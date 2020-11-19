@@ -214,7 +214,7 @@ Subreddits such as `r/drama`, `r/bestofoutrageculture` or `r/badhistory` are als
 > Some results are a bit surprising, as for example `r/hailcorporate` appears to be a loving community. Yet the description of the subreddit is
 > > /r/HailCorporate is to document times when people act as unwitting advertisers for a product as well as to document what appear to be legitimate adverts via [native advertising](https://en.wikipedia.org/wiki/Native_advertising).
 >
-> After an inspection of it's content, it clearly is a denunciation subreddit, and therefore should have a high Hater Score. For example the post with id [4isap0](reddit.com/r/HailCorporate/comments/4isap0/only_24_hrs_after_the_reddit_logo_is_replaced_by/) is clearly a negative one. It denunciates the use of native advertising to artificially boost the rating of the first Deadpool movie. Yet, it has a positive `POST_LABEL`, which means it is supposed to be a positive review.
+> After an inspection of it's content, it clearly is a denunciation subreddit, and therefore should have a high Hater Score. For example the post with id [4isap0](http://www.reddit.com/r/HailCorporate/comments/4isap0/only_24_hrs_after_the_reddit_logo_is_replaced_by/) is clearly a negative one. It denunciates the use of native advertising to artificially boost the rating of the first Deadpool movie. Yet, it has a positive `POST_LABEL`, which means it is supposed to be a positive review.
 > 
 > More details on that issue [later](#5-critical-analysis-of-the-data).
 
@@ -250,7 +250,7 @@ to do
 
 As mentionned earlier, the dataset appears not to be perfect, and some evaluations of positiveness or negativeness for posts are flawed. We mentionned the example of `r/HailCorporate` being a mostly negative subreddit yet having a mostly positive Emission score. This is not the only case we can find. `r/ShitLiberalsSay`, dedicated to the criticism of Liberal (~centrist) political views in the US, is mainly composed of users with Left Wing opinions. Yet only 6 out of its 24 references to `r/The_Donald` (a banned subreddit in support of D. Trump) are considered negative.
 
-Similarly, in `r/HateSubsInAction`, dedicated to judging the most hatefull subreddits (racism, bigotry, etc.), we can find a positive review of `r/The_Donald`. This review is obviously negative ([4mbmlx](reddit.com/r/HateSubsInAction/comments/4mbmlx/fun_soviet_reactionary_thread_on_the_donald/)), but it is considered as positive.
+Similarly, in `r/HateSubsInAction`, dedicated to judging the most hatefull subreddits (racism, bigotry, etc.), we can find a positive review of `r/The_Donald`. This review is obviously negative ([4mbmlx](http://www.reddit.com/r/HateSubsInAction/comments/4mbmlx/fun_soviet_reactionary_thread_on_the_donald/)), but it is considered as positive.
 
 ### 5.2 - A proposition of explanation
 
