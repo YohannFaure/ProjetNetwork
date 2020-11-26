@@ -19,8 +19,8 @@ def community_layout(g, partition):
     pos -- dict mapping int node -> (float x, float y)
         node positions
     """
-    pos_communities = _position_communities(g, partition, scale=3.)
-    pos_nodes = _position_nodes(g, partition, scale=1.)
+    pos_communities = _position_communities(g, partition, scale=8.)
+    pos_nodes = _position_nodes(g, partition, scale=6.)
     # combine positions
     pos = dict()
     for node in g.nodes():
@@ -79,8 +79,15 @@ def plot_community(g):
     from community import community_louvain
     partition = community_louvain.best_partition(g)
     pos = community_layout(g, partition)
-    nx.draw(g, pos, node_color=list(partition.values()))
-    nx.draw_networkx_edges(g, pos, edgelist=None, width=1.0, edge_color='k', style='solid', alpha=.1, arrowstyle='-|>', arrowsize=10)
-    nx.draw_networkx_labels(g, pos, labels=None, font_size=6, font_color='#FF5700', font_family='calibri')
+    d = dict(g.degree)
+    allcolors = ['r','g','cyan','orange','yellow','pink','lime','chartreuse','deepskyblue','olive','salmon','tomato','chocolate','bisque','palegreen','royalblue','springgreen']
+    colors = list(partition.values())
+    for i in range(len(colors)):
+        colors[i]=allcolors[colors[i]%len(allcolors)]
+    nx.draw(g, pos, node_color=colors,node_size=[v * 10 for v in d.values()],edgelist=[])
+    #nx.draw_networkx_edges(g, pos, edgelist=None, width=1.0, edge_color='k', style='solid', alpha=.1, arrowstyle='-|>', arrowsize=10)
+    #nx.draw_networkx_labels(g, pos, labels=None, font_size=13, font_color='r', font_family='calibri')
+    for node, (x, y) in pos.items():
+        plt.text(x, y, node, fontsize=np.log(d[node])*2, ha='center', va='center')
     plt.show()
     return(partition)

@@ -10,13 +10,11 @@ import Community_Detection as CD
 
 
 G=ReadTSV.data_to_digraph('body.tsv')
-l,n=NA.Time_Growth(G)
-fig=NA.Plot_Time_Growth(l,n)
-plt.show()
 
-GG=NA.degree_cut(G,1000)
+
+GG=NA.degree_cut(G,150)
 _,l1,l2=NA.edge_evaluation(GG)
-weight={i:l1[i]-l2[i] for i in l1}
+weight={i:l1[i] for i in l1}
 GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
 partition = CD.plot_community(GGG)
 
