@@ -263,6 +263,7 @@ After diving into the depth of Reddit, and following the most suspicious results
 
 Our interpretation is that the Neural Network used to determine the positivity of a post developped a very high treshold for negative reviews, considering something negative only when very explicit caracteristics appeared. Therefore, the results of community detection using the positive scores can be highly misleading, sorting together `r/The_Donald` and `r/Democrats` for example!
 
+The Neural Network's difficulty to label posts as negative is not surprising if you consider the fact that it is very difficult to train an algorithm to recognize social cues (for instance second degree) that are used in posts making fun of other communities: without an explicit statement of negative judgement, this kind of post is sorted as "positive", completely missing the actual meaning of the interaction. 
 
 
 
