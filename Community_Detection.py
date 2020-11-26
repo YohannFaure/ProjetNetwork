@@ -80,5 +80,7 @@ def plot_community(g):
     partition = community_louvain.best_partition(g)
     pos = community_layout(g, partition)
     nx.draw(g, pos, node_color=list(partition.values()))
+    nx.draw_networkx_edges(g, pos, edgelist=None, width=1.0, edge_color='k', style='solid', alpha=.1, arrowstyle='-|>', arrowsize=10)
+    nx.draw_networkx_labels(g, pos, labels=None, font_size=6, font_color='#FF5700', font_family='calibri')
     plt.show()
     return(partition)
