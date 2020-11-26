@@ -114,7 +114,7 @@ To cut according to the degree of the nodes, we need to find out what the distri
 
 This plot is quitte interesting, as it tells us that the distribution of degrees is broad, and might be called "scale-free". Here though, this is not a caracteristic of interest, therefore we will avoid all controversy and not call it "scale-free", just "with a broad degree distribution".
 
-### 3.4 - Ploting
+### 3.4 - Plotting
 
 Now that we know that the distribution is broad, we can simply cut it on the degree, as such a cut would still preserve the overall structure of the graph, at least for visual inspection.
 
@@ -256,7 +256,7 @@ An interesting aspect of this dataset is that it links subreddits, and can there
 
 The first problem here is that the Louvain algorithm only takes the type `Graph` as input. We could have used a community structure detection algorithm with directed graphs, but we wanted to keep things simple. We therefore had to make a data conversion.
 
-The second problem is that of the number of nodes. There are many nodes disconnected from the main connected component, to avoid detecting useless communities of 1, 2 or 3 subreddits, we decided to only keep the highest degree nodes. This comes with a major drawback : cutting nodes reduces the community structure of Reddit. This cut has to be at a low degree, and we decided 200 to be the cutoff. 
+The second problem is the the number of nodes: there are many nodes disconnected from the main connected component. Therefore, to avoid detecting useless communities of 1, 2 or 3 subreddits, we decided to only keep the nodes of highest degree. This comes with a major drawback: cutting nodes reduces the community structure of Reddit. This cut has to be at a low degree, and we decided 200 to be the cutoff. 
 
 ```python
 # Cutting on degree
@@ -270,17 +270,17 @@ GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
 
 ### 5.2 - Creating the algorithm
 
-The Louvain algorithm in itself stems from:
+The Louvain algorithm in itself stems from a module designed specifically for it:
 ```bash
-pip install -U git+https://github.com/taynaud/python-louvain.git@networkx2
+pip3 install -U git+https://github.com/taynaud/python-louvain.git@networkx2
 ```
 
 We created a Python module named `Community_Detection`, containing all the necessary functions. Once a proper graph is created, the communities can be both generated and plotted using 
 
 
 ```python
-import Community_Detection as CM
-partition = CM.plot_community(GGG)
+import Community_Detection as CD
+partition = CD.plot_community(GGG)
 ```
 
 
@@ -289,37 +289,37 @@ partition = CM.plot_community(GGG)
 
 The community structure created above is made using the positive edges only, but other weights would be conceivable.
 
-Here the size of the circles are proportional to the degree of each node, while its position is computed using a spring layout inside the community. The details are borring and did not make it to the final report, feel free to read the code.
+Here the size of the circles are proportional to the degree of each node, while their position is computed using a spring layout inside the community. The details are rather boring and did not make it to the final report, feel free to read the code.
 
-> Some highlights on the difficulties we encountered here :  
-> We had to decide colors and size for the communities and their text, and we wanted it proportional to their degree. That was quite painfull as Networkx only has a partial support for such functionnalities.  
+> Some highlights on the difficulties we encountered here:  
+> We had to decide colors and size for the communities and their text, and we wanted it ro be proportional to their degree. That was quite painful as Networkx only has a partial support for such functionnalities.  
 > An other difficulty is the resolution of the image. It has to be adjusted for every network, and that can take a while.
 
 
 ### 5.3 - Analysis of the communities
 
-The main observation here is that we end up with 6 macro-communities, with very distinct main topics, listed in the table bellow.
+The main observation here is that we end up with 6 macro-communities with very distinct main topics, which are listed in the table below.
 
 
-| Sports (with a visible American Football sub-community on the left)| Technology (with criptocurrencies on the top-right corner) | Free speeking (helping communities, sexuality, safe spaces) |
+| Sports (with a visible American Football sub-community on the left)| Technology (with cryptocurrencies in the top-right corner) | Free speeking (helping communities, sexuality, safe spaces) |
 |---|---|---|
 | ![](https://i.imgur.com/4I6mJPd.png) | ![](https://i.imgur.com/Oj9ob9J.png) | ![](https://i.imgur.com/OeAMrzo.png) |
 
-| Video games and geek culture (note : it contains SubRedditDrama) | Politics, Religion and News (and also consiparcies) | Humour? (this community is hard to define) |
+| Video games and geek culture (note: it contains SubRedditDrama) | Politics, Religion and News (and also conspiracies) | Humor? (this community is hard to define) |
 |-|-|-|
 | ![](https://i.imgur.com/YvE5Ptm.png) | ![](https://i.imgur.com/ZwpaWLq.png) | ![](https://i.imgur.com/YvEUVFa.png)|
 
-It is interesting to note that some communities end up in categories one could not expect them, for example Soccer ended up into the political community, and not into the Sports community.
+It is interesting to note that some subreddits end up in categories one would not necessarily have expected them to, for example r/Soccer which ended up in the political community instead of the Sports community.
 
-> This specific difference can be explained by the fact that all european countries' subreddits are in the political community, while the Sports community is highly America-centered, with a major emphasis on american footbal.
+> This specific difference can be explained by the fact that all european countries' subreddits are in the political community, and that soccer is more of a European sport while the Sports subreddit is highly US-centered, with a major emphasis on American football.
 
 ### 5.4 - Limits of this community mapping
 
-The first complaint here is that some communities are really close one to an other : technology and video games are so close that `r/BuildaPCforMe` ended up in video games while being clearly closer to technology topic-wise. Likewise, some subcommunities deserve their own community, such as American Football.
+The first limit here is that some communities are really close one to an other : technology and video games are so close that `r/BuildaPCforMe` ended up in video games while being clearly closer to technology topic-wise. Likewise, some important subcommunities would deserve their own community, such as American Football.
 
-The next major drawback is that this representation used a degree cut, and is higly dependent on that cut, as we discovered while experimenting. The higher the degree cutoff is, the worse the communities are. A simple explanation for this phenomena is that loosing small subreddits is loosing links of lenght 2 between some big subreddits.
+The next major drawback is that this representation used a degree cut, and is higly dependent on that cut, as we discovered while experimenting. The higher the degree cutoff is, the worse the communities are. A simple explanation for this phenomena is that loosing small subreddits is loosing links of lenght 2 between big subreddits.
 
-Finally this algorithm is not deterministic, it involves pseudo-random functions. Here is an other output for example, where the communities are slightly different, using the exact same function twice.
+Finally this algorithm is not deterministic: it involves pseudo-random functions. Here is an other output for example, where the communities are slightly different, using the exact same function twice.
 
 ![](https://i.imgur.com/XSNlPHP.png)
 
