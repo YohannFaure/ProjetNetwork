@@ -9,7 +9,7 @@ This project aims at studying an interaction graph in the social network [Reddit
 
 
 
-Our **main goal** is to get familiar with the data structure**s** offered by Networkx, and to implement simple algorithms over said structures.
+Our **main goal** is to get familiar with the data structure**s** offered by NetworkX, and to implement simple algorithms over said structures.
 
 
 [TOC]
@@ -72,7 +72,7 @@ The high dissimetry of this specification situation can be explained by the exis
 
 ### 2.2 - Selecting information
 
-In order to have a better understanding of the data, and to represent it correctly, we decided to pre-select part of the data before inserting it into the Networkx graph. We decided to create separate keys for the `POST_ID` (which is unique accros all posts, and therefore useful to distinguish them), `TIMESTAMP` (in case we want to study a time-dependent property), and `POST_LABEL` (the positive or negative [review of the post](#12---What-is-in-the-data)).
+In order to have a better understanding of the data, and to represent it correctly, we decided to pre-select part of the data before inserting it into the NetworkX graph. We decided to create separate keys for the `POST_ID` (which is unique accros all posts, and therefore useful to distinguish them), `TIMESTAMP` (in case we want to study a time-dependent property), and `POST_LABEL` (the positive or negative [review of the post](#12---What-is-in-the-data)).
 
 The rest of the data is stored raw from the `.tsv` file in `POST_PROPERTIES`, just in case we need it, but we did not use it in this project.
 
@@ -137,7 +137,7 @@ That is what `NA.degree_cut` does. It cuts the graph to only keep the highest de
 
 > NB: One can specify the "degrees" on which to cut, making it more of a generic cut function. For example `degree_cut(G,2000,degrees=dic)` would return a graph composed of only the nodes of `G` with a score given by the dictionnary `dic` higher than 2000.
 
-Let's plot it, using `NA.GraphDraw`. This function has a second argument that allows the selection of the interactions to plot (positive, negative, or total).
+Let us plot it, using `NA.GraphDraw`. This function has a second argument that allows the selection of the interactions to plot (positive, negative, or total).
 
 ```python
 >>> GG=NA.degree_cut(G,2500)
