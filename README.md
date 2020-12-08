@@ -5,7 +5,7 @@
 
 
 
-This project aims at studying an interaction graph in the social network [Reddit](https://www.reddit.com/)<sup id="a1">[1](#f1)</sup>. The data used can be found [here](http://snap.stanford.edu/data/soc-RedditHyperlinks.html).<sup id="a2">[2](#f2)</sup>
+This project aims at studying an interaction graph in the social network [Reddit](https://www.reddit.com/).<sup id="a1">[1](#f1)</sup> The data used can be found [here](http://snap.stanford.edu/data/soc-RedditHyperlinks.html).<sup id="a2">[2](#f2)</sup>
 
 
 
@@ -30,11 +30,16 @@ In a nutshell, Reddit allows users to create communities dedicated to a specific
 
 ### 1.2 - What is in the data
 
-The network represents every directed connections between two subreddits, a connection being a post containing a direct hyperlink to another subreddit in the text body (there is also a title-centered dataset, feel free to reproduce our results on it). The network is extracted from publicly available Reddit data of 2 years and a half, from January 2014 ($t_0$) to April 2017 ($t_f$).
+The network represents every directed connections between two subreddits, a connection being a post containing a direct hyperlink to another subreddit in the text body (there is also a title-centered dataset, feel free to reproduce our results on it). The network is extracted from publicly available Reddit data spanning 2 years and a half, from January 2014 ($t_0$) to April 2017 ($t_f$).
 
 Each hyperlink is annotated with a value named `POST_LABEL`, which can either be $-1$ or $+1$, and that reflects the sentiment of the source post towards the target post. A value of $-1$ means the source subreddit is negatively judging the target, while $+1$ means the source is positively judging the target.
 
-The way the labels have been determined is detailed in [this study](http://snap.stanford.edu/conflict/), but basically, it is done using Deep Learning.
+> The way the labels have been determined is detailed in [this study](http://snap.stanford.edu/conflict/), but basically, it is done using Deep Learning.
+> 
+> Said label is supposed reliable for most of the study, but we explore this question further in [section 6](#6---Critical-analysis-of-the-data) and assess the quality of the labeling, which often turns out not to be accurate.
+
+
+
 
 The network is, by essence, directed, temporal, and attributed.
 
@@ -49,7 +54,7 @@ The network is, by essence, directed, temporal, and attributed.
 
 This data is a collection of ponctual interactions between subreddits, but studying the frequency and the value of said interactions can lead to the construction of relations, in the way same as a relationship between two individuals can be represented as a succession of interactions.
 
-This report is mainly focused on a relationnal interpretation of this dataset, but an interractional approach is used to propose a growth model for Reddit in [this section](#44---General-time-growth-of-Reddit).
+This report is mainly focused on a relational interpretation of this dataset (we look at all combined interactions between two nodes), but an interactional (dynamic) approach is used to propose a growth model for Reddit in [this section](#44---General-time-growth-of-Reddit).
 
 We don't take into account the creation date of a subreddit, but such information is made available in the reference paper.
 
@@ -63,9 +68,10 @@ To do so, we created a python module composed of a few key functions, made speci
 
 ### 2.1 - Introducing MultiGraphs, first example
 
-The first attempt at reading the data led to edges being written multiple times, because most subreddits have mutiple references to the same other subreddit. For example `r/trendingsubreddits` refered to `r/changelog` 548 times. Oviously we had to use a directed graph, because the other way around, there is no post refering `r/trendingsubreddits` in `r/changelog`.
+The first attempt at reading the data led to edges being written multiple times, because most subreddits have mutiple references to the same other subreddit. 
+For example `r/trendingsubreddits` refered to `r/changelog` 548 times. Oviously we had to use a directed graph: if we take the same example, there is no post refering `r/trendingsubreddits` in `r/changelog`.
 
-The high dissimetry of this specification situation can be explained by the existance of this [post](https://www.reddit.com/22pz96) in `r/changelog`, created 2 days before the begining of the data collection, that mentioned a new functionality added to Reddit : a new subreddit (`r/trendingsubreddits`) in which is automatically posted every day the list of the best-performing subreddits of the day. Then, each post of this subreddit contained a link to this `r/changelog` post.
+The high dissimetry of this specific situation is explained in this [post](https://www.reddit.com/22pz96) in `r/changelog`, created 2 days before the begining of the data collection, that mentions a new functionality added to Reddit: a new subreddit (`r/trendingsubreddits`) in which is automatically posted every day the list of the best-performing subreddits of the day. Then, each post of this subreddit contained a link to this `r/changelog` post.
 
 > What's this? We've started displaying a small selection of [trending subreddits on the front page](https://www.reddit.com/r/changelog/comments/22pz96/reddit_change_trending_subreddits_on_the_front/). Trending subreddits are determined based on a variety of activity indicators (which are also limited to safe for work subreddits for now). Subreddits can choose to opt-out from consideration in their subreddit settings.  
 ><div style="text-align: right"><cite>Every post in r/trendingsubreddits</cite></div>
@@ -118,7 +124,7 @@ Plotting it might therefore not be an excellent idea. The graph is indeed too la
 
 ### 3.3 - Degree cutting
 
-To cut according to the degree of the nodes, we need to find out what the distribution of the degrees is. To do so, we designed two functions called `degree_distribution`, and `Degree_distribution_plot`, that do just what their names indicate.
+To cut according to the degree of the nodes, we need to find out what the distribution of degrees is. To do so, we designed two functions called `degree_distribution`, and `Degree_distribution_plot`, that do just what their names indicate.
 
 ```python
 >>> NA.Degree_distribution_plot(G)
@@ -127,7 +133,8 @@ To cut according to the degree of the nodes, we need to find out what the distri
 ![Degree_distribution_plot](https://i.imgur.com/7hfJUBq.png)
 
 
-This plot is quitte interesting, as it tells us that the distribution of degrees is broad, and might be called "scale-free". Here though, this is not a caracteristic of interest, therefore we will avoid all controversy and not call it "scale-free", just "with a broad degree distribution".
+This plot is quitte interesting, as it tells us that the distribution of degrees is broad, and might be called "scale-free", according to Barabási's definition<sup id="a3">[3](#f3)</sup>. Here though, this is not a caracteristic of interest, therefore we will avoid all controversy and not call it "scale-free", just "with a broad degree distribution".
+
 
 ### 3.4 - Plotting
 
@@ -135,7 +142,7 @@ Now that we know that the distribution is broad, we can simply cut it on the deg
 
 That is what `NA.degree_cut` does. It cuts the graph to only keep the highest degree nodes. 
 
-> NB: One can specify the "degrees" on which to cut, making it more of a generic cut function. For example `degree_cut(G,2000,degrees=dic)` would return a graph composed of only the nodes of `G` with a score given by the dictionnary `dic` higher than 2000.
+> NB: One can specify the "degrees" characteristic on which to cut, making it more of a generic cut function. For example `degree_cut(G,2000,degrees=dic)` would return a graph composed of only the nodes of `G` with a score given by the dictionnary `dic` higher than 2000.
 
 Let us plot it, using `NA.GraphDraw`. This function has a second argument that allows the selection of the interactions to plot (positive, negative, or total).
 
@@ -179,7 +186,7 @@ askreddit 5721
 
 The most hated, most loved, and best scoring subreddit is, without surprise, `r/askreddit`, a subreddit dedicated to asking questions about almost anything to Reddit users.
 
-But this is not very interesting. We might want to find the second and third subreddits. After a few tribulations, the results are the following:
+We might also want to find the second and third subreddits. After a few tribulations, the results are the following:
 
 <div style="text-align: right">
 
@@ -215,7 +222,7 @@ outoftheloop 1836
 ```
 
 
-Unsurprisingly, the subreddit with both the highest positive and negative judgement scores is `r/subredditdrama`, a subreddit dedicated to judging other subreddits (we might add, on a positive note, that the positive judgements outweight the negatives ones by a very large margin). 
+Unsurprisingly, the subreddit with both the highest positive and negative judgement scores is `r/subredditdrama`, a subreddit dedicated to judging other subreddits (we might add, on a positive note, that the positive judgements outweight the negatives ones by a very large margin, but this needs to be balanced by the limits of post labeling discussed in [section 6](#6---Critical-analysis-of-the-data)). 
 
 Subreddits such as `r/drama`, `r/bestofoutrageculture` or `r/badhistory` are also groups that we could expect to find in the subreddits with the highest negative judgement scores.
 
@@ -243,16 +250,20 @@ Subreddits such as `r/drama`, `r/bestofoutrageculture` or `r/badhistory` are als
 > 
 > More details on that issue [later](#5---Critical-analysis-of-the-data).
 
-### 4.3 - The question of normalization
+### 4.3 - Other index of importance
 
-A main critique one can have about these results is that the bigger a subreddit is, the higher its scores are, and therefore, some sort of normalization should be taken into account.
+In order to measure the importance of a node, one could use the sum of the love and hate scores (basically the degree, as we did for the graph cut), but it would be too simple to get a deeper understanding of the graph structure of Reddit. Other centralities do exist, and computing them could be a valid extension to this project.
 
-A plausible normalization factor could be the number of redditors into the subredit, but this information is not quite directly available as it is a time variable. An other one could be the total number of posts from this subreddit, or its posting rate, but such information would be equaly hard to obtain.
+The most relevant centrality to apply here would be PageRank, as it was designed to solve a very similar problem.
 
-We therefore opted for the simple counting approach both for time constraints and ease of acces to the data, but one could easily (but somehow maliciously) justify this choice by saying that a counting approach allows us to have a solid feeling of how big or small a subreddit is.
+### 4.4 - The question of normalization
+
+A main critique one can have about these results is that the bigger a subreddit is, the higher its scores are, and therefore, some sort of normalization should be taken into account. A plausible normalization factor could be the number of redditors into the subreddit, but this information is not quite directly available as it is a time variable. An other one could be the total number of posts from this subreddit, or its posting rate, but such information would be equaly hard to obtain. An other possibility would be to normalize using the degree of the node (the subreddit), but this would lead us to ignore important information regarding the size of subreddits: for instance, we could end up with a subreddit with only a very small number of positive links and no negative links being "the most loved" subreddit, when it would only come first because of its small number of links to others.
+
+We opted for the simple counting approach both for time constraints and ease of access to the data.
 
 
-### 4.4 - General time growth of Reddit
+### 4.5 - General time growth of Reddit
 
 One of the interesting things about networks is their growth. We can use this data to evaluate how fast Reddit has grown in this time scale. The basic hypothesis we made here is that the number of posts in an amount of time is proportional to the number of active members of the social network.
 
@@ -266,19 +277,25 @@ The result here is that the powerlaw fit is clearly a better one than the expone
 
 We can compare $N(t)$ the number of subreddits to $E(t)$ the number of posts referencing them.
 
-> This is a graph representation of the number of new subreddits per day, *i.e.* $\dfrac{\text{d}N}{\text{d}t}$, made available by [Randy Olson](http://www.randalolson.com/2013/03/12/retracing-the-evolution-of-reddit-through-post-data/):
-> ![](https://i.imgur.com/1IkHd7a.png)
-> Sadly, this data only spans from 2006 to 2013, out of our domain of study. We tried searching for mor data, but couldn't find a proper dataset corresponding to our period of time.
-
-
-
-With more information, we could for example compute a *Densification exponent*<sup id="a3">[3](#f3)</sup> $\alpha$ (if any). Such exponent exists if there is a law:
+With more information, we could for example compute a *Densification exponent*<sup id="a4">[4](#f4)</sup> $\alpha$ (if any). Such exponent exists if there is a law:
 
 $$
 E(t)\propto N(t)^\alpha
 $$
 
 In the case of networks without multiple edges, we have $1<\alpha<2$, 1 corresponding to a tree (the minimum for the network to be convex, and therefore studied as one single network instead of two separate networks), and 2 corresponding to a clique (a densely connected graph). In our case, such exponent could be over 2 as the graph is a MultiGraph, each node can be (and usually is) connected twice or more to the same other node.
+
+
+### 4.6 - An other time evolution metric
+
+Subreddits can be created and deleted, and the number of subreddits can be used as a metric of the size of Reddit itself. We do not have access to the creation date of every subreddit, but someone looked at that in 2013.
+
+This is a graph representation of the number of new subreddits per day, *i.e.* $\dfrac{\text{d}N}{\text{d}t}$, made available by [Randy Olson](http://www.randalolson.com/2013/03/12/retracing-the-evolution-of-reddit-through-post-data/):
+
+![](https://i.imgur.com/1IkHd7a.png)
+
+Sadly, this data only spans from 2006 to 2013, out of our domain of study. We tried searching for mor data, but couldn't find a proper dataset corresponding to our period of time.
+
 
 ---
 
@@ -382,7 +399,7 @@ The Neural Network's difficulty to label posts as negative is not surprising if 
 
 ### Personal conclusion on the project
 
-This project allowed us to come to grasp with the many functionnalities of NetworkX, and the concepts related to Networks and Graphs analysis studied in class. We had to dig a little deeper from time to time, reaching for other sources and discovering the Network Science field in further details.
+This project allowed us to come to grasp with the many functionalities of NetworkX, and the concepts related to Networks and Graphs analysis studied in class. We had to dig a little deeper from time to time, reaching for other sources and discovering the Network Science field in further details.
 
 More that a simple class project, this should make an excellent [`r/DataIsBeautiful`](https://www.reddit.com/r/dataisbeautiful/) post!
 
@@ -394,6 +411,8 @@ Notes
 
 <sup id="f2">2</sup> S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018. [↩](#a2)
 
-<sup id="f3">3</sup> J. Leskovec, J. Kleinberg, C. Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations, 2005. [↩](#a3)
+<sup id="f3">3</sup> Barabási, Réka. Emergence of Scaling in Random Networks, 1999. [↩](#a3)
+
+<sup id="f4">4</sup> J. Leskovec, J. Kleinberg, C. Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations, 2005. [↩](#a3)
 
 
