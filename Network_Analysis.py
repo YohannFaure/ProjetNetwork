@@ -368,3 +368,9 @@ def Plot_Time_Growth(list_times,list_numbers,time_div=5,fit=True):
     return(fig)
 
 
+def Largest_Connected_Component(G):
+    """
+    Returns a graph containing the largest connected component of the input graph
+    """
+    GG=G.subgraph(max(nx.connected components(G), key=len)).copy()
+    return(GG)
