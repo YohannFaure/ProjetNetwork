@@ -372,5 +372,5 @@ def Largest_Connected_Component(G):
     """
     Returns a graph containing the largest connected component of the input graph
     """
-    GG=G.subgraph(max(nx.connected components(G), key=len)).copy()
+    GG=G.subgraph(max(nx.connected_components(G), key=len)).copy()
     return(GG)
