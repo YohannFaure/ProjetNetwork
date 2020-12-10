@@ -321,7 +321,7 @@ weight={i:l1[i] for i in l1}
 GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
 ```
 
-> One could argue that a connected component detection algorithm would be better, and that is very true, but the degree cutting allows for a smaller computation time and a simpler implementation, for a similar result (we tested that assumption).
+> One could argue that a connected component detection algorithm would be better, and that is very true, but the degree cutting allows for a smaller computation time and a simpler implementation, for a similar result (we tested that assumption in [section 5.5](#55---Discussion-on-the-Degree-Cut)).
 
 ### 5.2 - Creating the algorithm
 
@@ -377,6 +377,51 @@ Finally this algorithm is not deterministic: it involves pseudo-random functions
 
 ![](https://i.imgur.com/XSNlPHP.png)
 
+### 5.5 - Discussion on the Degree Cut
+
+The **first** comment one can make about this decision of cutting on the degree is that the chosen degree is arbitrary. To evaluate the influence of this arbitrarity we tested with different cutoffs, and concluded that bellow 100, it displayed "fake" communities, *i.e.* super small communities isolated from the rest of the group. Above 300, the number of subreddit considered is too small to get reliable communities, and some non-related topics started to collide.
+
+The **second** comment is that of the connected component cutoff. One could simply cut the graph to only keep the largest connected component. This is the result we obtained:
+
+```python=
+>>> GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(G,l1))
+>>> GGG=NA.Largest_Connected_Component(GGG)
+>>> partition = CD.plot_community(GGG)
+```
+
+The computing time is of approximatelly 5mn, and the result is similar to that of a too low degree cutting:
+
+![](https://i.imgur.com/9FwouEu.png)
+
+This is obviously not acceptable.
+
+The **third** possibility would be to combine the degree cuttoff and the connected component cutoff, to avoid having small connected components adding noise to the result, while being able to go deeper in the small degree nodes. We tried, and here is the result (going bellow 50 for the degree cutoff makes the plot unreadable):
+
+```python=
+>>> GG=NA.degree_cut(G,50)
+>>> _,l1,l2=NA.edge_evaluation(GG)
+>>> weight={i:l1[i] for i in l1}
+>>> GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
+>>> GGG=NA.Largest_Connected_Component(GGG)
+>>> partition = CD.plot_community(GGG,comscale=15.,nodscale=3.)
+```
+
+![](https://i.imgur.com/OgyIUe6.png)
+
+It highlights new communities, such as the pornography community at the bottom left, or the music community on the left, but it makes the central communities (which are very similar to that of [section 5.3](#53---Analysis-of-the-communities)) unreadable.
+
+### 5.6 - Conclusion on the community structure of Reddit
+
+The topic-wise subreddit division of Reddit makes it a very interesting playground to determine the links between different subjects in popular culture. We have achieved an acceptable classification through this project, but as discused in the previous paragraph, this classification is far from perfect, and many objections and improvements can be made.
+
+The biggest issue here is that the deeper in degree cutoff we go, the harder the computation and the reanding of the results are. It is especially true when considering the whole network, as we obtain irrelevant small communities adding noise to the observation.
+
+A direct application of such classification would be the creation of an automatic NSFW (Not Safe For Work, meaning not suitable for children or public places) classification of subreddits, protecting users from unsolicited pornographic or gore content.<sup id="a5">[5](#f5)</sup> It could also be used to propose users new subreddits they might like. This last feature has actually recently been added to the Reddit application:
+
+![](https://i.imgur.com/HAny5yX.jpg)
+
+
+
 ---
 
 ## 6 - Critical analysis of the data
@@ -413,6 +458,13 @@ Notes
 
 <sup id="f3">3</sup> Barabási, Réka. Emergence of Scaling in Random Networks, 1999. [↩](#a3)
 
-<sup id="f4">4</sup> J. Leskovec, J. Kleinberg, C. Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations, 2005. [↩](#a3)
+<sup id="f4">4</sup> J. Leskovec, J. Kleinberg, C. Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations, 2005. [↩](#a4)
+
+<sup id="f5">5</sup> Such classification in Reddit exists, but it is rather based on the sincerity of users (), and the moderation of each subreddit by "super-users" called *mods* (moderators). Relying on users to decide what is NSFW and what is not is doomed to create problems, but is also the source of one of the most popular [running gag](https://knowyourmeme.com/memes/mods-are-gay) of Reddit. [↩](#a5)
+
+
+
+
+
 
 
