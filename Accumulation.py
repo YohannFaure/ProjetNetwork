@@ -12,11 +12,12 @@ import Community_Detection as CD
 G=ReadTSV.data_to_digraph('body.tsv')
 
 
-GG=NA.degree_cut(G,150)
+GG=NA.degree_cut(G,50)
 _,l1,l2=NA.edge_evaluation(GG)
 weight={i:l1[i] for i in l1}
 GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
-partition = CD.plot_community(GGG)
+GGG=NA.Largest_Connected_Component(GGG)
+partition = CD.plot_community(GGG,comscale=15.,nodscale=3.)
 
 
 l,lp,ln=NA.edge_evaluation(GG)

@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 
-def community_layout(g, partition):
+def community_layout(g, partition,comscale=8.,nodscale=3.):
     """
     Compute the layout for a modular graph.
 
@@ -19,8 +19,8 @@ def community_layout(g, partition):
     pos -- dict mapping int node -> (float x, float y)
         node positions
     """
-    pos_communities = _position_communities(g, partition, scale=8.)
-    pos_nodes = _position_nodes(g, partition, scale=6.)
+    pos_communities = _position_communities(g, partition, scale=comscale)
+    pos_nodes = _position_nodes(g, partition, scale=nodscale)
     # combine positions
     pos = dict()
     for node in g.nodes():
@@ -73,12 +73,12 @@ def _position_nodes(g, partition, **kwargs):
         pos.update(pos_subgraph)
     return(pos)
 
-def plot_community(g):
+def plot_community(g,comscale=8.,nodscale=3.):
     # to install networkx 2.0 compatible version of python-louvain use:
     # pip install -U git+https://github.com/taynaud/python-louvain.git@networkx2
     from community import community_louvain
     partition = community_louvain.best_partition(g)
-    pos = community_layout(g, partition)
+    pos = community_layout(g, partition,comscale=comscale,nodscale=nodscale)
     d = dict(g.degree)
     allcolors = ['r','g','cyan','orange','yellow','pink','lime','chartreuse','deepskyblue','olive','salmon','tomato','chocolate','bisque','palegreen','royalblue','springgreen']
     colors = list(partition.values())
