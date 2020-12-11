@@ -12,6 +12,8 @@ This project aims at studying an interaction graph in the social network [Reddit
 Our **main goal** is to get familiar with the data structure**s** offered by NetworkX, and to implement simple algorithms over said structures.
 
 
+The code we implemented and used is available on [GitHub](https://github.com/YohannFaure/ProjetNetwork). Feel free to test the functions while reading the report.
+
 [TOC]
 
 
@@ -379,9 +381,9 @@ Finally this algorithm is not deterministic: it involves pseudo-random functions
 
 ### 5.5 - Discussion on the Degree Cut
 
-The **first** comment one can make about this decision of cutting on the degree is that the chosen degree is arbitrary. To evaluate the influence of this arbitrarity we tested with different cutoffs, and concluded that bellow 100, it displayed "fake" communities, *i.e.* super small communities isolated from the rest of the group. Above 300, the number of subreddit considered is too small to get reliable communities, and some non-related topics started to collide.
+The **first** comment one can make about this decision of cutting on the degree is that the chosen degree is arbitrary. To evaluate the influence of this arbitrary decision, we tested with different cutoffs, and concluded that bellow 100, it displayed "fake" communities, *i.e.* very small communities isolated from the rest of the group. Above 300, the number of subreddits considered is too small to get reliable communities, and some non-related topics started to collide.
 
-The **second** comment is that of the connected component cutoff. One could simply cut the graph to only keep the largest connected component. This is the result we obtained:
+A **second** comment can be made about the connected component cutoff: one could simply cut the graph to only keep the largest connected component. This is the result we obtained:
 
 ```python=
 >>> GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(G,l1))
@@ -389,13 +391,13 @@ The **second** comment is that of the connected component cutoff. One could simp
 >>> partition = CD.plot_community(GGG)
 ```
 
-The computing time is of approximatelly 5mn, and the result is similar to that of a too low degree cutting:
+The computing time is of approximately 5mn, and the result is similar to that of a too low degree cutting:
 
 ![](https://i.imgur.com/9FwouEu.png)
 
 This is obviously not acceptable.
 
-The **third** possibility would be to combine the degree cuttoff and the connected component cutoff, to avoid having small connected components adding noise to the result, while being able to go deeper in the small degree nodes. We tried, and here is the result (going bellow 50 for the degree cutoff makes the plot unreadable):
+A **third** possibility would be to combine the degree cutoff and the connected component cutoff to avoid having small connected components adding noise to the result, while being able to go deeper in the small degree nodes. We tried, and here is the result (going bellow 50 for the degree cutoff makes the plot unreadable):
 
 ```python=
 >>> GG=NA.degree_cut(G,50)
@@ -412,15 +414,16 @@ It highlights new communities, such as the pornography community at the bottom l
 
 ### 5.6 - Conclusion on the community structure of Reddit
 
-The topic-wise subreddit division of Reddit makes it a very interesting playground to determine the links between different subjects in popular culture. We have achieved an acceptable classification through this project, but as discused in the previous paragraph, this classification is far from perfect, and many objections and improvements can be made.
+The topic-wise subreddit division of Reddit makes it a very interesting playground to determine the links between different subjects in popular culture. We have achieved a stable and topic-coherent classification through this project, but as discussed in the previous paragraph, this classification is far from perfect, and many objections and improvements can be made.
 
-The biggest issue here is that the deeper in degree cutoff we go, the harder the computation and the reanding of the results are. It is especially true when considering the whole network, as we obtain irrelevant small communities adding noise to the observation.
+The biggest issue here is that the deeper in degree cutoff we go, the harder the computation and the rendering of the results are. It is especially true when considering the whole network, as we obtain irrelevant small communities adding noise to the observation.
 
-A direct application of such classification would be the creation of an automatic NSFW (Not Safe For Work, meaning not suitable for children or public places) classification of subreddits, protecting users from unsolicited pornographic or gore content.<sup id="a5">[5](#f5)</sup> It could also be used to propose users new subreddits they might like. This last feature has actually recently been added to the Reddit application:
+A direct application of such classification would be the creation of an automatic NSFW (Not Safe For Work, meaning not suitable for children or public places) classification of subreddits, protecting users from unsollicited pornographic or gore content.<sup id="a5">[5](#f5)</sup> It could also be used to propose users new subreddits they might like. This last feature has actually recently been added to the Reddit application:
 
 ![](https://i.imgur.com/HAny5yX.jpg)
 
 
+> The reader might notice that Reddit proposed us a French-Speaking subreddit, meaning that it has detected that we are French. Reddit actually agressively proposes higly related subreddits to redditors, leading to an increased feeling of echo chamber effect since the implementation of this feature.
 
 ---
 
@@ -442,7 +445,7 @@ The Neural Network's difficulty to label posts as negative is not surprising if 
 
 ---
 
-### Personal conclusion on the project
+## Personal conclusion on the project
 
 This project allowed us to come to grasp with the many functionalities of NetworkX, and the concepts related to Networks and Graphs analysis studied in class. We had to dig a little deeper from time to time, reaching for other sources and discovering the Network Science field in further details.
 
@@ -460,11 +463,5 @@ Notes
 
 <sup id="f4">4</sup> J. Leskovec, J. Kleinberg, C. Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations, 2005. [↩](#a4)
 
-<sup id="f5">5</sup> Such classification in Reddit exists, but it is rather based on the sincerity of users (), and the moderation of each subreddit by "super-users" called *mods* (moderators). Relying on users to decide what is NSFW and what is not is doomed to create problems, but is also the source of one of the most popular [running gag](https://knowyourmeme.com/memes/mods-are-gay) of Reddit. [↩](#a5)
-
-
-
-
-
-
+<sup id="f5">5</sup> Such classification in Reddit exists, but it is rather based on the sincerity of redditors, and the moderation of each subreddit by "super-users" called *mods* (moderators). Relying on users to decide what is NSFW and what is not is bound to create problems, but usually works when combined with the NSFW post detection bot. [↩](#a5)
 
