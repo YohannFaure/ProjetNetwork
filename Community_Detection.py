@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+"""
+This document is designed to study communities in networks.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -13,6 +18,12 @@ def community_layout(g, partition,comscale=8.,nodscale=3.):
 
     partition -- dict mapping int node -> int community
         graph partitions
+
+    comscale -- positive float, ~10, representing the inverse of the
+        spring constant between communities
+
+    nodscale -- positive float, ~3, representing the inverse of the
+        spring constant between nodes
 
     Returns:
     --------
@@ -88,6 +99,6 @@ def plot_community(g,comscale=8.,nodscale=3.):
     #nx.draw_networkx_edges(g, pos, edgelist=None, width=1.0, edge_color='k', style='solid', alpha=.1, arrowstyle='-|>', arrowsize=10)
     #nx.draw_networkx_labels(g, pos, labels=None, font_size=13, font_color='r', font_family='calibri')
     for node, (x, y) in pos.items():
-        plt.text(x, y, node, fontsize=np.log(d[node])*2, ha='center', va='center')
+        plt.text(x, y, node, fontsize=8, ha='center', va='center')
     plt.show()
     return(partition)
