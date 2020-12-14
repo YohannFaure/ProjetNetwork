@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        ProjetNetwork - HedgeDoc
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="https://demo.hedgedoc.org/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://demo.hedgedoc.org/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://demo.hedgedoc.org/icons/favicon-16x16.png">
+    <link rel="manifest" href="https://demo.hedgedoc.org/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://demo.hedgedoc.org/icons/safari-pinned-tab.svg" color="#b51f08">
+    <link rel="shortcut icon" href="https://demo.hedgedoc.org/icons/favicon.ico">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.3;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}.markdown-body h1[id]:before,.markdown-body h2[id]:before,.markdown-body h3[id]:before,.markdown-body h4[id]:before,.markdown-body h5[id]:before,.markdown-body h6[id]:before{display:block;content:" ";margin-top:-55px;height:55px;visibility:hidden}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}.markdown-body.slides aside.notes{display:none}.markdown-body.slides ol,.markdown-body.slides ul{display:inline-block;text-align:left;margin:0 0 0 1em;padding:0}.markdown-body.slides table{width:50%;margin:0 auto;border-collapse:collapse;border-spacing:0;display:table}.markdown-body.slides table td,.markdown-body.slides table th{text-align:left;padding:.2em .5em;border:none;border-bottom:1px solid}.markdown-body.slides table tr{border-top:0;background-color:#fff}.markdown-body.slides table tr:nth-child(2n){background-color:inherit}.markdown-body.slides table tbody tr:last-child td,.markdown-body.slides table tbody tr:last-child th{border-bottom:none}.markdown-body.slides h1,.markdown-body.slides h2{border-bottom:0}.night .markdown-body.slides h1,.night .markdown-body.slides h2,.night .markdown-body.slides h3,.night .markdown-body.slides h4,.night .markdown-body.slides h5,.night .markdown-body.slides h6{color:#000}.markdown-body section>section:last-child{margin-bottom:1.5em!important}.ui-view-area.black{background-color:#000!important}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid"><h1 id="ProjetNetwork"><a class="anchor hidden-xs" href="#ProjetNetwork" title="ProjetNetwork"><i class="fa fa-link"></i></a>ProjetNetwork</h1><p><em>Yohann Faure</em><br>
+<em>Flora Gaudillière</em></p><p>This project aims at studying an interaction graph in the social network <a href="https://www.reddit.com/" target="_blank" rel="noopener">Reddit</a>.<sup id="a1"><a href="#f1">1</a></sup> The data used can be found <a href="http://snap.stanford.edu/data/soc-RedditHyperlinks.html" target="_blank" rel="noopener">here</a>.<sup id="a2"><a href="#f2">2</a></sup></p><p>Our <strong>main goal</strong> is to get familiar with the data structure<strong>s</strong> offered by NetworkX, and to implement simple algorithms over said structures.</p><p>The code we implemented and used is available on <a href="https://github.com/YohannFaure/ProjetNetwork" target="_blank" rel="noopener">GitHub</a>. Feel free to test the functions while reading the report.</p><p></p><div class="toc"><ul>
+<li><a href="#ProjetNetwork" title="ProjetNetwork">ProjetNetwork</a><ul>
+<li><a href="#1---Understanding-the-data" title="1 - Understanding the data">1 - Understanding the data</a><ul>
+<li><a href="#11---How-reddit-works" title="1.1 - How reddit works">1.1 - How reddit works</a></li>
+<li><a href="#12---What-is-in-the-data" title="1.2 - What is in the data">1.2 - What is in the data</a></li>
+<li><a href="#13---Dynamics-Interactions-or-relations" title="1.3 - Dynamics: Interactions or relations?">1.3 - Dynamics: Interactions or relations?</a></li>
+</ul>
+</li>
+<li><a href="#2---File-conversion-ReadTSVpy" title="2 - File conversion: ReadTSV.py">2 - File conversion: ReadTSV.py</a><ul>
+<li><a href="#21---Introducing-MultiGraphs-first-example" title="2.1 - Introducing MultiGraphs, first example">2.1 - Introducing MultiGraphs, first example</a></li>
+<li><a href="#22---Selecting-information" title="2.2 - Selecting information">2.2 - Selecting information</a></li>
+<li><a href="#23---Converting-the-file" title="2.3 - Converting the file">2.3 - Converting the file</a></li>
+</ul>
+</li>
+<li><a href="#3---Getting-in-touch-with-the-data-structure" title="3 - Getting in touch with the data structure">3 - Getting in touch with the data structure</a><ul>
+<li><a href="#31---Storing-the-analysis-functions-Network_Analysispy" title="3.1 - Storing the analysis functions: Network_Analysis.py">3.1 - Storing the analysis functions: Network_Analysis.py</a></li>
+<li><a href="#32---First-approach" title="3.2 - First approach">3.2 - First approach</a></li>
+<li><a href="#33---Degree-distribution" title="3.3 - Degree distribution">3.3 - Degree distribution</a></li>
+<li><a href="#34---Degree-cutting" title="3.4 - Degree cutting">3.4 - Degree cutting</a></li>
+<li><a href="#35---Converting-to-non-multi-Graph" title="3.5 - Converting to non-multi Graph">3.5 - Converting to non-multi Graph</a></li>
+</ul>
+</li>
+<li><a href="#4---Data-Analysis" title="4 - Data Analysis">4 - Data Analysis</a><ul>
+<li><a href="#41---Simple-reception-metrics" title="4.1 - Simple reception metrics">4.1 - Simple reception metrics</a></li>
+<li><a href="#42---Simple-emission-metrics" title="4.2 - Simple emission metrics">4.2 - Simple emission metrics</a></li>
+<li><a href="#43---Other-index-of-importance" title="4.3 - Other index of importance">4.3 - Other index of importance</a></li>
+<li><a href="#44---The-question-of-normalization" title="4.4 - The question of normalization">4.4 - The question of normalization</a></li>
+<li><a href="#45---General-time-growth-of-Reddit" title="4.5 - General time growth of Reddit">4.5 - General time growth of Reddit</a></li>
+<li><a href="#46---An-other-time-evolution-metric" title="4.6 - An other time evolution metric">4.6 - An other time evolution metric</a></li>
+</ul>
+</li>
+<li><a href="#5---Communities-of-subreddits" title="5 - Communities of subreddits">5 - Communities of subreddits</a><ul>
+<li><a href="#51---Position-of-the-problem" title="5.1 - Position of the problem">5.1 - Position of the problem</a></li>
+<li><a href="#52---Creating-the-algorithm" title="5.2 - Creating the algorithm">5.2 - Creating the algorithm</a></li>
+<li><a href="#53---Analysis-of-the-communities" title="5.3 - Analysis of the communities">5.3 - Analysis of the communities</a></li>
+<li><a href="#54---Limits-of-this-community-mapping" title="5.4 - Limits of this community mapping">5.4 - Limits of this community mapping</a></li>
+<li><a href="#55---Discussion-on-the-Degree-Cut" title="5.5 - Discussion on the Degree Cut">5.5 - Discussion on the Degree Cut</a></li>
+<li><a href="#56---Conclusion-on-the-community-structure-of-Reddit" title="5.6 - Conclusion on the community structure of Reddit">5.6 - Conclusion on the community structure of Reddit</a></li>
+</ul>
+</li>
+<li><a href="#6---Critical-analysis-of-the-data" title="6 - Critical analysis of the data">6 - Critical analysis of the data</a><ul>
+<li><a href="#61---Flawed-Cases" title="6.1 - Flawed Cases">6.1 - Flawed Cases</a></li>
+<li><a href="#62---A-proposition-of-explanation" title="6.2 - A proposition of explanation">6.2 - A proposition of explanation</a></li>
+</ul>
+</li>
+<li><a href="#Personal-conclusion-on-the-project" title="Personal conclusion on the project">Personal conclusion on the project</a></li>
+<li><a href="#Notes" title="Notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</div><p></p><hr><h2 id="1---Understanding-the-data"><a class="anchor hidden-xs" href="#1---Understanding-the-data" title="1---Understanding-the-data"><i class="fa fa-link"></i></a>1 - Understanding the data</h2><h3 id="11---How-reddit-works"><a class="anchor hidden-xs" href="#11---How-reddit-works" title="11---How-reddit-works"><i class="fa fa-link"></i></a>1.1 - How reddit works</h3><p>In a nutshell, Reddit allows users to create communities dedicated to a specific topic, named <em>subreddits</em>, designed by <code>r/their_name</code>. For example the subreddit <code>r/Cats</code> talks about cats. In a given subreddit, one can post images, text, or links, and redditors (users of reddit) can then either upvote (like) ou downvote (dislike) the post.</p><blockquote>
+<p><strong>Example:</strong> this is a post in <code>r/Cats</code>, by the redditor <code>u/STEMnet</code>, with a total score of ~26 700 (upvotes - downvotes). It has a unique id (c7s6ww) that allows it to be found without searching, and that appears in the web adress of the post: <a href="https://www.reddit.com/c7s6ww" target="_blank" rel="noopener">reddit.com/c7s6ww</a><br>
+<img src="https://i.imgur.com/nq5wMMz.png" alt=""></p>
+</blockquote><h3 id="12---What-is-in-the-data"><a class="anchor hidden-xs" href="#12---What-is-in-the-data" title="12---What-is-in-the-data"><i class="fa fa-link"></i></a>1.2 - What is in the data</h3><p>The network represents every directed connections between two subreddits, a connection being a post containing a direct hyperlink to another subreddit in the text body (there is also a title-centered dataset, feel free to reproduce our results on it). The network is extracted from publicly available Reddit data spanning 2 years and a half, from January 2014 (<span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-14-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msub><mi>t</mi><mn>0</mn></msub></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-80" style="width: 0.976em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.771em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.437em, 1000.77em, 2.513em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-81"><span class="msubsup" id="MathJax-Span-82"><span style="display: inline-block; position: relative; width: 0.771em; height: 0px;"><span style="position: absolute; clip: rect(3.23em, 1000.31em, 4.152em, -999.997em); top: -3.993em; left: 0em;"><span class="mi" id="MathJax-Span-83" style="font-family: MathJax_Math; font-style: italic;">t</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; top: -3.84em; left: 0.361em;"><span class="mn" id="MathJax-Span-84" style="font-size: 70.7%; font-family: MathJax_Main;">0</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.066em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>t</mi><mn>0</mn></msub></math></span></span><script type="math/tex" id="MathJax-Element-14">t_0</script></span>) to April 2017 (<span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-15-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msub><mi>t</mi><mi>f</mi></msub></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-85" style="width: 1.027em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.822em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.437em, 1000.82em, 2.666em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-86"><span class="msubsup" id="MathJax-Span-87"><span style="display: inline-block; position: relative; width: 0.822em; height: 0px;"><span style="position: absolute; clip: rect(3.23em, 1000.31em, 4.152em, -999.997em); top: -3.993em; left: 0em;"><span class="mi" id="MathJax-Span-88" style="font-family: MathJax_Math; font-style: italic;">t</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; top: -3.84em; left: 0.361em;"><span class="mi" id="MathJax-Span-89" style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.054em;"></span></span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.434em; border-left: 0px solid; width: 0px; height: 1.253em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>t</mi><mi>f</mi></msub></math></span></span><script type="math/tex" id="MathJax-Element-15">t_f</script></span>).</p><p>Each hyperlink is annotated with a value named <code>POST_LABEL</code>, which can either be <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-16-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo>&amp;#x2212;</mo><mn>1</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-90" style="width: 1.591em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.283em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1001.23em, 2.462em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-91"><span class="mo" id="MathJax-Span-92" style="font-family: MathJax_Main;">−</span><span class="mn" id="MathJax-Span-93" style="font-family: MathJax_Main;">1</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.184em; border-left: 0px solid; width: 0px; height: 1.066em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-16">-1</script></span> or <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-17-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo>+</mo><mn>1</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-94" style="width: 1.591em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.283em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1001.23em, 2.462em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-95"><span class="mo" id="MathJax-Span-96" style="font-family: MathJax_Main;">+</span><span class="mn" id="MathJax-Span-97" style="font-family: MathJax_Main;">1</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.184em; border-left: 0px solid; width: 0px; height: 1.066em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>+</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-17">+1</script></span>, and that reflects the sentiment of the source post towards the target post. A value of <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-18-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo>&amp;#x2212;</mo><mn>1</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-98" style="width: 1.591em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.283em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1001.23em, 2.462em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-99"><span class="mo" id="MathJax-Span-100" style="font-family: MathJax_Main;">−</span><span class="mn" id="MathJax-Span-101" style="font-family: MathJax_Main;">1</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.184em; border-left: 0px solid; width: 0px; height: 1.066em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-18">-1</script></span> means the source subreddit is negatively judging the target, while <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-19-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo>+</mo><mn>1</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-102" style="width: 1.591em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.283em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1001.23em, 2.462em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-103"><span class="mo" id="MathJax-Span-104" style="font-family: MathJax_Main;">+</span><span class="mn" id="MathJax-Span-105" style="font-family: MathJax_Main;">1</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.184em; border-left: 0px solid; width: 0px; height: 1.066em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>+</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-19">+1</script></span> means the source is positively judging the target.</p><blockquote>
+<p>The way the labels have been determined is detailed in <a href="http://snap.stanford.edu/conflict/" target="_blank" rel="noopener">this study</a>, but basically, it is done using Deep Learning.</p>
+<p>Said label is supposed reliable for most of the study, but we explore this question further in <a href="#6---Critical-analysis-of-the-data">section 6</a> and assess the quality of the labeling, which often turns out not to be accurate.</p>
+</blockquote><p>The network is, by essence, directed, temporal, and attributed.</p><blockquote>
+<p><strong>Example:</strong> this post from <code>r/Cats</code> is one of the posts represented in the dataset, with a positive reference to <code>r/Dogs</code><br>
+<img src="https://i.imgur.com/zVe5x5u.png" alt=""></p>
+</blockquote><blockquote>
+<p><strong>Note:</strong> the date in the data is wrong. For example the datestamp of <code>POST_ID=34c15a</code>, from <code>r/changelog</code> to <code>r/redditdev</code>, is <code>2015-04-27</code>, while the real datestamp of this post is <code>2015-04-30</code>.</p>
+</blockquote><h3 id="13---Dynamics-Interactions-or-relations"><a class="anchor hidden-xs" href="#13---Dynamics-Interactions-or-relations" title="13---Dynamics-Interactions-or-relations"><i class="fa fa-link"></i></a>1.3 - Dynamics: Interactions or relations?</h3><p>This data is a collection of ponctual interactions between subreddits, but studying the frequency and the value of said interactions can lead to the construction of relations, in the way same as a relationship between two individuals can be represented as a succession of interactions.</p><p>This report is mainly focused on a relational interpretation of this dataset (we look at all combined interactions between two nodes), but an interactional (dynamic) approach is used to propose a growth model for Reddit in <a href="#44---General-time-growth-of-Reddit">this section</a>.</p><p>We don’t take into account the creation date of a subreddit, but such information is made available in the reference paper.</p><hr><h2 id="2---File-conversion-ReadTSVpy"><a class="anchor hidden-xs" href="#2---File-conversion-ReadTSVpy" title="2---File-conversion-ReadTSVpy"><i class="fa fa-link"></i></a>2 - File conversion: <code>ReadTSV.py</code></h2><p>First, we have to work on the data conversion, <em>i.e.</em> converting the original data, stored in a <code>.tsv</code> file, into some NetworkX understandable format.</p><p>To do so, we created a python module composed of a few key functions, made specifically for this <code>.tsv</code> file format, and specialized for our data.</p><h3 id="21---Introducing-MultiGraphs-first-example"><a class="anchor hidden-xs" href="#21---Introducing-MultiGraphs-first-example" title="21---Introducing-MultiGraphs-first-example"><i class="fa fa-link"></i></a>2.1 - Introducing MultiGraphs, first example</h3><p>The first attempt at reading the data led to edges being written multiple times, because most subreddits have mutiple references to the same other subreddit.<br>
+For example <code>r/trendingsubreddits</code> refered to <code>r/changelog</code> 548 times. Oviously we had to use a directed graph: if we take the same example, there is no post refering <code>r/trendingsubreddits</code> in <code>r/changelog</code>.</p><p>The high dissimetry of this specific situation is explained in this <a href="https://www.reddit.com/22pz96" target="_blank" rel="noopener">post</a> in <code>r/changelog</code>, created 2 days before the begining of the data collection, that mentions a new functionality added to Reddit: a new subreddit (<code>r/trendingsubreddits</code>) in which is automatically posted every day the list of the best-performing subreddits of the day. Then, each post of this subreddit contained a link to this <code>r/changelog</code> post.</p><blockquote>
+<p>What’s this? We’ve started displaying a small selection of <a href="https://www.reddit.com/r/changelog/comments/22pz96/reddit_change_trending_subreddits_on_the_front/" target="_blank" rel="noopener">trending subreddits on the front page</a>. Trending subreddits are determined based on a variety of activity indicators (which are also limited to safe for work subreddits for now). Subreddits can choose to opt-out from consideration in their subreddit settings.</p>
+<div style="text-align: right"><cite>Every post in r/trendingsubreddits</cite></div>
+</blockquote><h3 id="22---Selecting-information"><a class="anchor hidden-xs" href="#22---Selecting-information" title="22---Selecting-information"><i class="fa fa-link"></i></a>2.2 - Selecting information</h3><p>In order to have a better understanding of the data, and to represent it correctly, we decided to pre-select part of the data before inserting it into the NetworkX graph. We decided to create separate keys for the <code>POST_ID</code> (which is unique accros all posts, and therefore useful to distinguish them), <code>TIMESTAMP</code> (in case we want to study a time-dependent property), and <code>POST_LABEL</code> (the positive or negative <a href="#12---What-is-in-the-data">review of the post</a>).</p><p>The rest of the data is stored raw from the <code>.tsv</code> file in <code>POST_PROPERTIES</code>, just in case we need it, but we did not use it in this project.</p><h3 id="23---Converting-the-file"><a class="anchor hidden-xs" href="#23---Converting-the-file" title="23---Converting-the-file"><i class="fa fa-link"></i></a>2.3 - Converting the file</h3><p>To convert the file, simply use the <code>ReadTSV</code> module, and call the <code>data_to_digraph</code> function on either files from <a href="http://snap.stanford.edu/data/soc-RedditHyperlinks.html" target="_blank" rel="noopener">here</a>.</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> networkx <span class="hljs-keyword">as</span> nx
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> ReadTSV
+<span class="hljs-meta">&gt;&gt;&gt; </span>G=ReadTSV.data_to_digraph(<span class="hljs-string">'body.tsv'</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>G
+&lt;networkx.classes.multidigraph.MultiDiGraph object at <span class="hljs-number">0x7f4d6c653850</span>&gt;
+</code></pre><hr><h2 id="3---Getting-in-touch-with-the-data-structure"><a class="anchor hidden-xs" href="#3---Getting-in-touch-with-the-data-structure" title="3---Getting-in-touch-with-the-data-structure"><i class="fa fa-link"></i></a>3 - Getting in touch with the data structure</h2><h3 id="31---Storing-the-analysis-functions-Network_Analysispy"><a class="anchor hidden-xs" href="#31---Storing-the-analysis-functions-Network_Analysispy" title="31---Storing-the-analysis-functions-Network_Analysispy"><i class="fa fa-link"></i></a>3.1 - Storing the analysis functions: <code>Network_Analysis.py</code></h3><p>We  decided to group all of our functions in a single python file called <code>Network_Analysis.py</code>. This way, a simple <code>import Network_Analysis as NA</code><br>
+allows us to use them seamlessly in the scripts.</p><p>To get details on the content of this module, feel free to use the following commands:</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> Network_Analysis <span class="hljs-keyword">as</span> NA
+<span class="hljs-meta">&gt;&gt;&gt; </span>help(NA)
+</code></pre><h3 id="32---First-approach"><a class="anchor hidden-xs" href="#32---First-approach" title="32---First-approach"><i class="fa fa-link"></i></a>3.2 - First approach</h3><p>In order to really understand the data structure of the graph, we first wanted to plot it. But we had to check a few things before doing so.</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>len(G.nodes)
+<span class="hljs-number">35776</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>len(G.edges)
+<span class="hljs-number">286561</span>
+</code></pre><p>Plotting it might therefore not be an excellent idea. The graph is indeed too large to get a proper display using NetworkX’s standard <code>draw</code> method. We could imagine a drawing method based on a cut of the graph, for example we could select the higest degree nodes and only plot these.</p><h3 id="33---Degree-distribution"><a class="anchor hidden-xs" href="#33---Degree-distribution" title="33---Degree-distribution"><i class="fa fa-link"></i></a>3.3 - Degree distribution</h3><p>To cut according to the degree of the nodes, we need to find out what the distribution of degrees is. To do so, we designed two functions called <code>degree_distribution</code>, and <code>Degree_distribution_plot</code>, that do just what their names indicate.</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>NA.Degree_distribution_plot(G)
+</code></pre><p><img src="https://i.imgur.com/7hfJUBq.png" alt="Degree_distribution_plot"></p><p>This plot is quitte interesting, as it tells us that the distribution of degrees is broad, and might be called “scale-free”, according to Barabási’s definition<sup id="a3"><a href="#f3">3</a></sup>. Here though, this is not a caracteristic of interest, therefore we will avoid all controversy and not call it “scale-free”, just “with a broad degree distribution”.</p><h3 id="34---Degree-cutting"><a class="anchor hidden-xs" href="#34---Degree-cutting" title="34---Degree-cutting"><i class="fa fa-link"></i></a>3.4 - Degree cutting</h3><p>Now that we know that the distribution is broad, we can simply cut it on the degree, as such a cut would still preserve the overall structure of the graph, at least for visual inspection.</p><p>That is what <code>NA.degree_cut</code> does. It cuts the graph to only keep the highest degree nodes.</p><blockquote>
+<p>NB: One can specify the “degrees” characteristic on which to cut, making it more of a generic cut function. For example <code>degree_cut(G,2000,degrees=dic)</code> would return a graph composed of only the nodes of <code>G</code> with a score given by the dictionnary <code>dic</code> higher than 2000.</p>
+</blockquote><p>Let us plot it, using <code>NA.GraphDraw</code>. This function has a second argument that allows the selection of the interactions to plot (positive, negative, or total).</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>GG=NA.degree_cut(G,<span class="hljs-number">2500</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>NA.GraphDraw(GG,<span class="hljs-number">1</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>NA.GraphDraw(GG,<span class="hljs-number">-1</span>)
+</code></pre><p><img src="https://i.imgur.com/C3HckCv.png" alt="GraphDraw1"></p><p><img src="https://i.imgur.com/jW9PB1L.png" alt="GraphDraw2"></p><h3 id="35---Converting-to-non-multi-Graph"><a class="anchor hidden-xs" href="#35---Converting-to-non-multi-Graph" title="35---Converting-to-non-multi-Graph"><i class="fa fa-link"></i></a>3.5 - Converting to non-multi Graph</h3><p>Another idea we had was to create conversion tools to make a simple Graph out of the MultiGraph. To do so, one simply needs to use <code>NA.MultigraphToGraph</code>. It allows us to better manipulate the graph.</p><blockquote>
+<p>We also made a function to convert a Directed Graph into a simple Graph, but such manipulation looses the very essence of this dataset.</p>
+</blockquote><hr><h2 id="4---Data-Analysis"><a class="anchor hidden-xs" href="#4---Data-Analysis" title="4---Data-Analysis"><i class="fa fa-link"></i></a>4 - Data Analysis</h2><p>It is now time to answer a few questions, such as “which subreddit receives the most hate in all of reddit?”, “which subreddit is the most appreciated?”, or “what subreddit clusters can be found?”.</p><h3 id="41---Simple-reception-metrics"><a class="anchor hidden-xs" href="#41---Simple-reception-metrics" title="41---Simple-reception-metrics"><i class="fa fa-link"></i></a>4.1 - Simple reception metrics</h3><p>We designed a set of function to find out the most loved and hated subreddits. Their usage goes as follows:</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>positive_score, negative_score=NA.positive_negative_scores(G)
+<span class="hljs-meta">&gt;&gt;&gt; </span>total_score={i:positive_score[i]-negative_score[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> positive_score}
+<span class="hljs-meta">&gt;&gt;&gt; </span>most_loved = NA.Key_Max(positive_score)
+askreddit <span class="hljs-number">6525</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>most_hated = NA.Key_Max(negative_score)
+askreddit <span class="hljs-number">804</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>best_scoring = NA.Key_Max(total_score)
+askreddit <span class="hljs-number">5721</span>
+</code></pre><p>The most hated, most loved, and best scoring subreddit is, without surprise, <code>r/askreddit</code>, a subreddit dedicated to asking questions about almost anything to Reddit users.</p><p>We might also want to find the second and third subreddits. After a few tribulations, the results are the following:</p><div style="text-align: right">
+<table>
+<thead>
+<tr>
+<th>Love score</th>
+<th>Hate score</th>
+<th>Worst total score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r/askreddit 6525</td>
+<td>r/askreddit 804</td>
+<td>r/latterdaysaints -52</td>
+</tr>
+<tr>
+<td>r/iama 3462</td>
+<td>r/news 484</td>
+<td>r/ketorecipes -31</td>
+</tr>
+<tr>
+<td>r/pics 2533</td>
+<td>r/todayilearned 414</td>
+<td>r/femradebates -25</td>
+</tr>
+<tr>
+<td>r/writingprompts 2454</td>
+<td>r/worldnews 407</td>
+<td>r/lifeafternarcissism -19</td>
+</tr>
+<tr>
+<td>r/leagueoflegends 2251</td>
+<td>r/kotakuinaction 388</td>
+<td>r/nsfw_gifs -14</td>
+</tr>
+<tr>
+<td>r/videos 2235</td>
+<td>r/pics 246</td>
+<td>r/fitnesscirclejerk -13</td>
+</tr>
+<tr>
+<td>r/todayilearned 1957</td>
+<td>r/iama 232</td>
+<td>r/civcraftexchange -13</td>
+</tr>
+<tr>
+<td>r/worldnews 1850</td>
+<td>r/showerthoughts 221</td>
+<td>r/triviatime -11</td>
+</tr>
+<tr>
+<td>r/funny 1847</td>
+<td>r/videos 211</td>
+<td>r/idg0d -10</td>
+</tr>
+<tr>
+<td>r/nfl 1381</td>
+<td>r/adviceanimals 208</td>
+<td>r/thebatmanteam -9</td>
+</tr>
+</tbody>
+</table>
+</div><h3 id="42---Simple-emission-metrics"><a class="anchor hidden-xs" href="#42---Simple-emission-metrics" title="42---Simple-emission-metrics"><i class="fa fa-link"></i></a>4.2 - Simple emission metrics</h3><p>Conversely, we might ask ourselves what are the subreddits that judge others most positively or negatively.</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>positive_score, negative_score=NA.positive_negative_scores_emitters(G)
+<span class="hljs-meta">&gt;&gt;&gt; </span>total_score={i:positive_score[i]-negative_score[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> positive_score}
+<span class="hljs-meta">&gt;&gt;&gt; </span>most_loved = NA.Key_Max(positive_score)
+subredditdrama <span class="hljs-number">3035</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>most_hated = NA.Key_Max(negative_score)
+subredditdrama <span class="hljs-number">1630</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>best_scoring = NA.Key_Max(total_score)
+outoftheloop <span class="hljs-number">1836</span>
+</code></pre><p>Unsurprisingly, the subreddit with both the highest positive and negative judgement scores is <code>r/subredditdrama</code>, a subreddit dedicated to judging other subreddits (we might add, on a positive note, that the positive judgements outweight the negatives ones by a very large margin, but this needs to be balanced by the limits of post labeling discussed in <a href="#6---Critical-analysis-of-the-data">section 6</a>).</p><p>Subreddits such as <code>r/drama</code>, <code>r/bestofoutrageculture</code> or <code>r/badhistory</code> are also groups that we could expect to find in the subreddits with the highest negative judgement scores.</p><div style="text-align: right">
+<table>
+<thead>
+<tr>
+<th>Lover score</th>
+<th>Hater score</th>
+<th>Worst total score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r/subredditdrama 3035</td>
+<td>r/subredditdrama 1630</td>
+<td>r/shitghazisays -65</td>
+</tr>
+<tr>
+<td>r/outoftheloop 1897</td>
+<td>r/drama 497</td>
+<td>r/femrameta -56</td>
+</tr>
+<tr>
+<td>r/circlebroke 1873</td>
+<td>r/circlebroke 485</td>
+<td>r/mubookclub -45</td>
+</tr>
+<tr>
+<td>r/shitliberalssay 1605</td>
+<td>r/copypasta 464</td>
+<td>r/hhcjcopypasta -30</td>
+</tr>
+<tr>
+<td>r/hailcorporate 1479</td>
+<td>r/circlejerkcopypasta 375</td>
+<td>r/nolibswatch -30</td>
+</tr>
+<tr>
+<td>r/writingprompts 145</td>
+<td>r/shitliberalssay 363</td>
+<td>r/iosthemes -28</td>
+</tr>
+<tr>
+<td>r/copypasta 1360</td>
+<td>r/bestofoutrageculture 309</td>
+<td>r/wherearethefeminists -24</td>
+</tr>
+<tr>
+<td>r/buildapc 1303</td>
+<td>r/conspiracy 293</td>
+<td>r/warcraftlore -18</td>
+</tr>
+<tr>
+<td>r/tipofmypenis 1185</td>
+<td>r/writingprompts 251</td>
+<td>r/wowcirclejerk -15</td>
+</tr>
+<tr>
+<td>r/conspiracy 1169</td>
+<td>r/badhistory 219</td>
+<td>r/metaphotography -15</td>
+</tr>
+</tbody>
+</table>
+</div><blockquote>
+<p>Some results are a bit surprising: for example, <code>r/hailcorporate</code> appears to be a loving subreddit. Yet the description of the subreddit is</p>
+<blockquote>
+<p>/r/HailCorporate is to document times when people act as unwitting advertisers for a product as well as to document what appear to be legitimate adverts via <a href="https://en.wikipedia.org/wiki/Native_advertising" target="_blank" rel="noopener">native advertising</a>.</p>
+</blockquote>
+<p>After an inspection of its content, it clearly is a denunciation subreddit, and therefore should have a high Hater Score. For example the post with id <a href="http://www.reddit.com/4isap0/" target="_blank" rel="noopener">4isap0</a> is clearly a negative one. It calls out the use of native advertising to artificially boost the rating of the first Deadpool movie. Yet, it has a positive <code>POST_LABEL</code>, which means it is supposed to be a positive review.</p>
+<p>More details on that issue <a href="#5---Critical-analysis-of-the-data">later</a>.</p>
+</blockquote><h3 id="43---Other-index-of-importance"><a class="anchor hidden-xs" href="#43---Other-index-of-importance" title="43---Other-index-of-importance"><i class="fa fa-link"></i></a>4.3 - Other index of importance</h3><p>In order to measure the importance of a node, one could use the sum of the love and hate scores (basically the degree, as we did for the graph cut), but it would be too simple to get a deeper understanding of the graph structure of Reddit. Other centralities do exist, and computing them could be a valid extension to this project.</p><p>The most relevant centrality to apply here would be PageRank, as it was designed to solve a very similar problem.</p><h3 id="44---The-question-of-normalization"><a class="anchor hidden-xs" href="#44---The-question-of-normalization" title="44---The-question-of-normalization"><i class="fa fa-link"></i></a>4.4 - The question of normalization</h3><p>A main critique one can have about these results is that the bigger a subreddit is, the higher its scores are, and therefore, some sort of normalization should be taken into account. A plausible normalization factor could be the number of redditors into the subreddit, but this information is not quite directly available as it is a time variable. An other one could be the total number of posts from this subreddit, or its posting rate, but such information would be equaly hard to obtain. An other possibility would be to normalize using the degree of the node (the subreddit), but this would lead us to ignore important information regarding the size of subreddits: for instance, we could end up with a subreddit with only a very small number of positive links and no negative links being “the most loved” subreddit, when it would only come first because of its small number of links to others.</p><p>We opted for the simple counting approach both for time constraints and ease of access to the data.</p><h3 id="45---General-time-growth-of-Reddit"><a class="anchor hidden-xs" href="#45---General-time-growth-of-Reddit" title="45---General-time-growth-of-Reddit"><i class="fa fa-link"></i></a>4.5 - General time growth of Reddit</h3><p>One of the interesting things about networks is their growth. We can use this data to evaluate how fast Reddit has grown in this time scale. The basic hypothesis we made here is that the number of posts in an amount of time is proportional to the number of active members of the social network.</p><p>On the following graph, we represented in dashed lines the actual number of posts in fonction of time. The yellow line corresponds to the expected shape of such a number if the number of users was constant. It is obtained by simply approximating the curve by its tangeant at <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-20-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>t</mi><mo>=</mo><msub><mi>t</mi><mn>0</mn></msub></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-106" style="width: 2.974em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.41em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.437em, 1002.41em, 2.513em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-107"><span class="mi" id="MathJax-Span-108" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mo" id="MathJax-Span-109" style="font-family: MathJax_Main; padding-left: 0.259em;">=</span><span class="msubsup" id="MathJax-Span-110" style="padding-left: 0.259em;"><span style="display: inline-block; position: relative; width: 0.771em; height: 0px;"><span style="position: absolute; clip: rect(3.23em, 1000.31em, 4.152em, -999.997em); top: -3.993em; left: 0em;"><span class="mi" id="MathJax-Span-111" style="font-family: MathJax_Math; font-style: italic;">t</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; top: -3.84em; left: 0.361em;"><span class="mn" id="MathJax-Span-112" style="font-size: 70.7%; font-family: MathJax_Main;">0</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.066em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>t</mi><mo>=</mo><msub><mi>t</mi><mn>0</mn></msub></math></span></span><script type="math/tex" id="MathJax-Element-20">t=t_0</script></span>. The green line is an exponential approximation of the curve, with initial and final numbers of posts fixed. Finaly the blue curve is a powerlaw fit.</p><p><img src="https://i.imgur.com/l9Xvbhj.png" alt="Plot_Time_Growth"></p><p>The result here is that the powerlaw fit is clearly a better one than the exponential fit. It is interesting in itself to make predictions on the growth of Reddit, in order to prepare its infrastucture for the future, for example, but it might be interesting to compare that to the number of nodes, <em>i.e.</em> the number of subreddits.</p><p>We can compare <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-21-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>N</mi><mo stretchy=&quot;false&quot;>(</mo><mi>t</mi><mo stretchy=&quot;false&quot;>)</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-113" style="width: 2.513em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.052em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.283em, 1001.95em, 2.615em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-114"><span class="mi" id="MathJax-Span-115" style="font-family: MathJax_Math; font-style: italic;">N<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.105em;"></span></span><span class="mo" id="MathJax-Span-116" style="font-family: MathJax_Main;">(</span><span class="mi" id="MathJax-Span-117" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mo" id="MathJax-Span-118" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.372em; border-left: 0px solid; width: 0px; height: 1.378em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-21">N(t)</script></span> the number of subreddits to <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-22-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>E</mi><mo stretchy=&quot;false&quot;>(</mo><mi>t</mi><mo stretchy=&quot;false&quot;>)</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-119" style="width: 2.41em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.949em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.283em, 1001.85em, 2.615em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-120"><span class="mi" id="MathJax-Span-121" style="font-family: MathJax_Math; font-style: italic;">E<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.054em;"></span></span><span class="mo" id="MathJax-Span-122" style="font-family: MathJax_Main;">(</span><span class="mi" id="MathJax-Span-123" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mo" id="MathJax-Span-124" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.372em; border-left: 0px solid; width: 0px; height: 1.378em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-22">E(t)</script></span> the number of posts referencing them.</p><p>With more information, we could for example compute a <em>Densification exponent</em><sup id="a4"><a href="#f4">4</a></sup> <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-23-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>&amp;#x03B1;</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-125" style="width: 0.822em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.669em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.591em, 1000.62em, 2.359em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-126"><span class="mi" id="MathJax-Span-127" style="font-family: MathJax_Math; font-style: italic;">α</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.691em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>α</mi></math></span></span><script type="math/tex" id="MathJax-Element-23">\alpha</script></span> (if any). Such exponent exists if there is a law:</p><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-24-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>E</mi><mo stretchy=&quot;false&quot;>(</mo><mi>t</mi><mo stretchy=&quot;false&quot;>)</mo><mo>&amp;#x221D;</mo><mi>N</mi><mo stretchy=&quot;false&quot;>(</mo><mi>t</mi><msup><mo stretchy=&quot;false&quot;>)</mo><mi>&amp;#x03B1;</mi></msup></math>" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-128" style="width: 7.072em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.791em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.283em, 1005.79em, 2.615em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-129"><span class="mi" id="MathJax-Span-130" style="font-family: MathJax_Math; font-style: italic;">E<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.054em;"></span></span><span class="mo" id="MathJax-Span-131" style="font-family: MathJax_Main;">(</span><span class="mi" id="MathJax-Span-132" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="mo" id="MathJax-Span-133" style="font-family: MathJax_Main;">)</span><span class="mo" id="MathJax-Span-134" style="font-family: MathJax_Main; padding-left: 0.259em;">∝</span><span class="mi" id="MathJax-Span-135" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.259em;">N<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.105em;"></span></span><span class="mo" id="MathJax-Span-136" style="font-family: MathJax_Main;">(</span><span class="mi" id="MathJax-Span-137" style="font-family: MathJax_Math; font-style: italic;">t</span><span class="msubsup" id="MathJax-Span-138"><span style="display: inline-block; position: relative; width: 0.925em; height: 0px;"><span style="position: absolute; clip: rect(3.076em, 1000.31em, 4.408em, -999.997em); top: -3.993em; left: 0em;"><span class="mo" id="MathJax-Span-139" style="font-family: MathJax_Main;">)</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; top: -4.403em; left: 0.412em;"><span class="mi" id="MathJax-Span-140" style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;">α</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.372em; border-left: 0px solid; width: 0px; height: 1.378em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>E</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>∝</mo><mi>N</mi><mo stretchy="false">(</mo><mi>t</mi><msup><mo stretchy="false">)</mo><mi>α</mi></msup></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-24">
+E(t)\propto N(t)^\alpha
+</script></span></p><p>In the case of networks without multiple edges, we have <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-25-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>1</mn><mo>&amp;lt;</mo><mi>&amp;#x03B1;</mi><mo>&amp;lt;</mo><mn>2</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-141" style="width: 5.228em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.255em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.386em, 1004.2em, 2.41em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-142"><span class="mn" id="MathJax-Span-143" style="font-family: MathJax_Main;">1</span><span class="mo" id="MathJax-Span-144" style="font-family: MathJax_Main; padding-left: 0.259em;">&lt;</span><span class="mi" id="MathJax-Span-145" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.259em;">α</span><span class="mo" id="MathJax-Span-146" style="font-family: MathJax_Main; padding-left: 0.259em;">&lt;</span><span class="mn" id="MathJax-Span-147" style="font-family: MathJax_Main; padding-left: 0.259em;">2</span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.122em; border-left: 0px solid; width: 0px; height: 1.003em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>&lt;</mo><mi>α</mi><mo>&lt;</mo><mn>2</mn></math></span></span><script type="math/tex" id="MathJax-Element-25">1<\alpha<2</script></span>, 1 corresponding to a tree (the minimum for the network to be convex, and therefore studied as one single network instead of two separate networks), and 2 corresponding to a clique (a densely connected graph). In our case, such exponent could be over 2 as the graph is a MultiGraph, each node can be (and usually is) connected twice or more to the same other node.</p><h3 id="46---An-other-time-evolution-metric"><a class="anchor hidden-xs" href="#46---An-other-time-evolution-metric" title="46---An-other-time-evolution-metric"><i class="fa fa-link"></i></a>4.6 - An other time evolution metric</h3><p>Subreddits can be created and deleted, and the number of subreddits can be used as a metric of the size of Reddit itself. We do not have access to the creation date of every subreddit, but someone looked at that in 2013.</p><p>This is a graph representation of the number of new subreddits per day, <em>i.e.</em> <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-26-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mstyle displaystyle=&quot;true&quot; scriptlevel=&quot;0&quot;><mfrac><mrow><mtext>d</mtext><mi>N</mi></mrow><mrow><mtext>d</mtext><mi>t</mi></mrow></mfrac></mstyle></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-148" style="width: 2.205em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.796em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(0.669em, 1001.8em, 3.076em, -999.997em); top: -2.2em; left: 0em;"><span class="mrow" id="MathJax-Span-149"><span class="mstyle" id="MathJax-Span-150"><span class="mrow" id="MathJax-Span-151"><span class="mfrac" id="MathJax-Span-152"><span style="display: inline-block; position: relative; width: 1.591em; height: 0px; margin-right: 0.105em; margin-left: 0.105em;"><span style="position: absolute; clip: rect(3.128em, 1001.44em, 4.152em, -999.997em); top: -4.659em; left: 50%; margin-left: -0.715em;"><span class="mrow" id="MathJax-Span-153"><span class="mtext" id="MathJax-Span-154" style="font-family: MathJax_Main;">d</span><span class="mi" id="MathJax-Span-155" style="font-family: MathJax_Math; font-style: italic;">N<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.105em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; clip: rect(3.128em, 1000.87em, 4.152em, -999.997em); top: -3.327em; left: 50%; margin-left: -0.459em;"><span class="mrow" id="MathJax-Span-156"><span class="mtext" id="MathJax-Span-157" style="font-family: MathJax_Main;">d</span><span class="mi" id="MathJax-Span-158" style="font-family: MathJax_Math; font-style: italic;">t</span></span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; clip: rect(0.873em, 1001.59em, 1.232em, -999.997em); top: -1.278em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 1.591em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.078em;"></span></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.205em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.934em; border-left: 0px solid; width: 0px; height: 2.628em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mtext>d</mtext><mi>N</mi></mrow><mrow><mtext>d</mtext><mi>t</mi></mrow></mfrac></mstyle></math></span></span><script type="math/tex" id="MathJax-Element-26">\dfrac{\text{d}N}{\text{d}t}</script></span>, made available by <a href="http://www.randalolson.com/2013/03/12/retracing-the-evolution-of-reddit-through-post-data/" target="_blank" rel="noopener">Randy Olson</a>:</p><p><img src="https://i.imgur.com/1IkHd7a.png" alt=""></p><p>Sadly, this data only spans from 2006 to 2013, out of our domain of study. We tried searching for mor data, but couldn’t find a proper dataset corresponding to our period of time.</p><hr><h2 id="5---Communities-of-subreddits"><a class="anchor hidden-xs" href="#5---Communities-of-subreddits" title="5---Communities-of-subreddits"><i class="fa fa-link"></i></a>5 - Communities of subreddits</h2><h3 id="51---Position-of-the-problem"><a class="anchor hidden-xs" href="#51---Position-of-the-problem" title="51---Position-of-the-problem"><i class="fa fa-link"></i></a>5.1 - Position of the problem</h3><p>An interesting aspect of this dataset is that it links subreddits, and can therefore describe communities, <em>i.e.</em> ensembles of subreddits that respond to one another and communicate. The goal of this section is to use the <a href="https://en.wikipedia.org/wiki/Louvain_method" target="_blank" rel="noopener">Louvain algorithm</a> to detect such communities.</p><p>The first problem here is that the Louvain algorithm only takes the type <code>Graph</code> as input. We could have used a community structure detection algorithm with directed graphs, but we wanted to keep things simple. We therefore had to make a data conversion.</p><p>The second problem is the the number of nodes: there are many nodes disconnected from the main connected component. Therefore, to avoid detecting useless communities of 1, 2 or 3 subreddits, we decided to only keep the nodes of highest degree. This comes with a major drawback: cutting nodes reduces the community structure of Reddit. This cut has to be at a low degree, and we decided 200 to be the cutoff.</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-comment"># Cutting on degree</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>GG=NA.degree_cut(G,<span class="hljs-number">200</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-comment"># Defining a weight for the edges</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>_,l1,l2=NA.edge_evaluation(GG)
+<span class="hljs-meta">&gt;&gt;&gt; </span>weight={i:l1[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> l1}
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-comment"># Making the MultiDiGraph a Graph</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
+</code></pre><blockquote>
+<p>One could argue that a connected component detection algorithm would be better, and that is very true, but the degree cutting allows for a smaller computation time and a simpler implementation, for a similar result (we tested that assumption in <a href="#55---Discussion-on-the-Degree-Cut">section 5.5</a>).</p>
+</blockquote><h3 id="52---Creating-the-algorithm"><a class="anchor hidden-xs" href="#52---Creating-the-algorithm" title="52---Creating-the-algorithm"><i class="fa fa-link"></i></a>5.2 - Creating the algorithm</h3><p>The Louvain algorithm in itself stems from a module designed specifically for it:</p><pre><code class="bash hljs">pip3 install -U git+https://github.com/taynaud/python-louvain.git@networkx2
+</code></pre><p>We created a Python module named <code>Community_Detection</code>, containing all the necessary functions. Once a proper graph is created, the communities can be both generated and plotted using the following:</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> Community_Detection <span class="hljs-keyword">as</span> CD
+<span class="hljs-meta">&gt;&gt;&gt; </span>partition = CD.plot_community(GGG)
+</code></pre><p><img src="https://i.imgur.com/GPLfYz5.png" alt=""></p><p>The community structure created above is made using the positive edges only, but other weights would be conceivable.</p><p>Here the size of the circles is proportional to the degree of each node, while their position is computed using a spring layout inside the community. The details are rather boring and did not make it to the final report, feel free to read the code.</p><blockquote>
+<p><em>Some highlights on the difficulties we encountered here:</em><br>
+We had to decide colors and size for the communities and their text, and we wanted it to be proportional to their degree. That was quite painful as NetworkX only has a partial support for such functionnalities. An other difficulty is the resolution of the image. It has to be adjusted for every network, and that can take a while.</p>
+</blockquote><h3 id="53---Analysis-of-the-communities"><a class="anchor hidden-xs" href="#53---Analysis-of-the-communities" title="53---Analysis-of-the-communities"><i class="fa fa-link"></i></a>5.3 - Analysis of the communities</h3><p>The main observation here is that we end up with 6 macro-communities with very distinct main topics, which are listed in the table below.</p><table>
+<thead>
+<tr>
+<th>Sports (with a visible American Football sub-community on the left)</th>
+<th>Technology (with cryptocurrencies in the top-right corner)</th>
+<th>Free speeking (helping communities, sexuality, safe spaces)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://i.imgur.com/4I6mJPd.png" alt=""></td>
+<td><img src="https://i.imgur.com/Oj9ob9J.png" alt=""></td>
+<td><img src="https://i.imgur.com/OeAMrzo.png" alt=""></td>
+</tr>
+</tbody>
+</table><table>
+<thead>
+<tr>
+<th>Video games and geek culture</th>
+<th>Politics, Religion and News (and also conspiracies)</th>
+<th>Humor? (this community is hard to define)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://i.imgur.com/YvE5Ptm.png" alt=""></td>
+<td><img src="https://i.imgur.com/ZwpaWLq.png" alt=""></td>
+<td><img src="https://i.imgur.com/YvEUVFa.png" alt=""></td>
+</tr>
+</tbody>
+</table><p>It is interesting to note that some subreddits end up in categories one would not necessarily have expected them to, for example r/Soccer which ended up in the political community instead of the Sports community.</p><blockquote>
+<p>This specific difference can be explained by the fact that all european countries have a dedicated subreddit, containing discussions about both European politics and sports. Soccer being more of an European sport, and the Sports subreddit being highly US-centered, with a major emphasis on American football, it is no real surprise.</p>
+</blockquote><h3 id="54---Limits-of-this-community-mapping"><a class="anchor hidden-xs" href="#54---Limits-of-this-community-mapping" title="54---Limits-of-this-community-mapping"><i class="fa fa-link"></i></a>5.4 - Limits of this community mapping</h3><p>The first limit here is that some communities are really close one to an other: technology and video games are so close that <code>r/BuildaPCforMe</code> ended up in video games while being clearly closer to technology topic-wise. Likewise, some important subcommunities would deserve their own community, such as American Football.</p><p>The next major drawback is that this representation used a degree cut, and is higly dependent on that cut, as we discovered while experimenting. The higher the degree cutoff is, the worse the communities are. A simple explanation for this phenomena is that loosing small subreddits is loosing links of lenght 2 between big subreddits.</p><p>Finally this algorithm is not deterministic: it involves pseudo-random functions. Here is an other output for example, where the communities are slightly different, using the exact same function twice.</p><p><img src="https://i.imgur.com/XSNlPHP.png" alt=""></p><h3 id="55---Discussion-on-the-Degree-Cut"><a class="anchor hidden-xs" href="#55---Discussion-on-the-Degree-Cut" title="55---Discussion-on-the-Degree-Cut"><i class="fa fa-link"></i></a>5.5 - Discussion on the Degree Cut</h3><p>The <strong>first</strong> comment one can make about this decision of cutting on the degree is that the chosen degree is arbitrary. To evaluate the influence of this arbitrary decision, we tested with different cutoffs, and concluded that bellow 100, it displayed “fake” communities, <em>i.e.</em> very small communities isolated from the rest of the group. Above 300, the number of subreddits considered is too small to get reliable communities, and some non-related topics started to collide.</p><p>A <strong>second</strong> comment can be made about the connected component cutoff: one could simply cut the graph to only keep the largest connected component. This is the result we obtained:</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(G,l1))
+<span class="hljs-meta">&gt;&gt;&gt; </span>GGG=NA.Largest_Connected_Component(GGG)
+<span class="hljs-meta">&gt;&gt;&gt; </span>partition = CD.plot_community(GGG)
+</code></pre><p>The computing time is of approximately 5mn, and the result is similar to that of a too low degree cutting:</p><p><img src="https://i.imgur.com/9FwouEu.png" alt=""></p><p>This is obviously not acceptable.</p><p>A <strong>third</strong> possibility would be to combine the degree cutoff and the connected component cutoff to avoid having small connected components adding noise to the result, while being able to go deeper in the small degree nodes. We tried, and here is the result (going bellow 50 for the degree cutoff makes the plot unreadable):</p><pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>GG=NA.degree_cut(G,<span class="hljs-number">50</span>)
+<span class="hljs-meta">&gt;&gt;&gt; </span>_,l1,l2=NA.edge_evaluation(GG)
+<span class="hljs-meta">&gt;&gt;&gt; </span>weight={i:l1[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> l1}
+<span class="hljs-meta">&gt;&gt;&gt; </span>GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
+<span class="hljs-meta">&gt;&gt;&gt; </span>GGG=NA.Largest_Connected_Component(GGG)
+<span class="hljs-meta">&gt;&gt;&gt; </span>partition = CD.plot_community(GGG,comscale=<span class="hljs-number">15.</span>,nodscale=<span class="hljs-number">3.</span>)
+</code></pre><p><img src="https://i.imgur.com/OgyIUe6.png" alt=""></p><p>It highlights new communities, such as the pornography community at the bottom left, or the music community on the left, but it makes the central communities (which are very similar to that of <a href="#53---Analysis-of-the-communities">section 5.3</a>) unreadable.</p><h3 id="56---Conclusion-on-the-community-structure-of-Reddit"><a class="anchor hidden-xs" href="#56---Conclusion-on-the-community-structure-of-Reddit" title="56---Conclusion-on-the-community-structure-of-Reddit"><i class="fa fa-link"></i></a>5.6 - Conclusion on the community structure of Reddit</h3><p>The topic-wise subreddit division of Reddit makes it a very interesting playground to determine the links between different subjects in popular culture. We have achieved a stable and topic-coherent classification through this project, but as discussed in the previous paragraph, this classification is far from perfect, and many objections and improvements can be made.</p><p>The biggest issue here is that the deeper in degree cutoff we go, the harder the computation and the rendering of the results are. It is especially true when considering the whole network, as we obtain irrelevant small communities adding noise to the observation.</p><p>A direct application of such classification would be the creation of an automatic NSFW (Not Safe For Work, meaning not suitable for children or public places) classification of subreddits, protecting users from unsollicited pornographic or gore content.<sup id="a5"><a href="#f5">5</a></sup> It could also be used to propose users new subreddits they might like. This last feature has actually recently been added to the Reddit application:</p><p><img src="https://i.imgur.com/HAny5yX.jpg" alt=""></p><blockquote>
+<p>The reader might notice that Reddit proposed us a French-Speaking subreddit, meaning that it has detected that we are French. Reddit actually agressively proposes higly related subreddits to redditors, leading to an increased feeling of echo chamber effect since the implementation of this feature.</p>
+</blockquote><hr><h2 id="6---Critical-analysis-of-the-data"><a class="anchor hidden-xs" href="#6---Critical-analysis-of-the-data" title="6---Critical-analysis-of-the-data"><i class="fa fa-link"></i></a>6 - Critical analysis of the data</h2><h3 id="61---Flawed-Cases"><a class="anchor hidden-xs" href="#61---Flawed-Cases" title="61---Flawed-Cases"><i class="fa fa-link"></i></a>6.1 - Flawed Cases</h3><p>As mentionned earlier, the dataset appears to be flawed, especially on some of the evaluations of positiveness or negativeness for posts. We mentioned the example of <code>r/HailCorporate</code> being a mostly negative subreddit yet having a mostly positive emission score. This is not the only case we can find. <code>r/ShitLiberalsSay</code>, dedicated to the criticism of Liberal (~centrist-right) political views in the US, is mainly composed of users with Left Wing opinions. Yet only 6 out of its 24 references to <code>r/The_Donald</code> (a subreddit in support of D. Trump, banned from Reddit for <a href="https://en.wikipedia.org/wiki/R/The_Donald" target="_blank" rel="noopener">multiple reasons</a>) are considered negative, which is unrealistic.</p><p>Similarly, in <code>r/HateSubsInAction</code>, dedicated to judging the most hateful subreddits (racism, bigotry, etc.), we can find a positive review of <code>r/The_Donald</code>. This review is obviously negative (<a href="http://www.reddit.com/r/HateSubsInAction/comments/4mbmlx/fun_soviet_reactionary_thread_on_the_donald/" target="_blank" rel="noopener">4mbmlx</a>), but it is considered as positive by the sorting algorithm used by the authors.</p><h3 id="62---A-proposition-of-explanation"><a class="anchor hidden-xs" href="#62---A-proposition-of-explanation" title="62---A-proposition-of-explanation"><i class="fa fa-link"></i></a>6.2 - A proposition of explanation</h3><p>After diving into the depths  of Reddit, and scrutinising the most suspicious results of our study, we found out that it was almost impossible to find a false negative review of a subreddit, while false positive are all around the corner.</p><p>Our interpretation is that the Neural Network used to determine the positivity of a post developped a very high treshold for negative reviews, considering something negative only when very explicit caracteristics appeared. Therefore, the results of community detection using the positive scores can be highly misleading, sorting together <code>r/The_Donald</code> and <code>r/Democrats</code> for example!</p><p>The Neural Network’s difficulty to label posts as negative is not surprising if you consider the fact that it is very difficult to train an algorithm to recognize social cues (for instance sarcasm) that are used in posts making fun of other subreddits: without an explicit statement of negative judgement, this kind of post is sorted as “positive”, completely missing the actual meaning of the interaction.</p><hr><h2 id="Personal-conclusion-on-the-project"><a class="anchor hidden-xs" href="#Personal-conclusion-on-the-project" title="Personal-conclusion-on-the-project"><i class="fa fa-link"></i></a>Personal conclusion on the project</h2><p>This project allowed us to come to grasp with the many functionalities of NetworkX, and the concepts related to Networks and Graphs analysis studied in class. We had to dig a little deeper from time to time, reaching for other sources and discovering the Network Science field in further details.</p><p>More that a simple class project, this should make an excellent <a href="https://www.reddit.com/r/dataisbeautiful/" target="_blank" rel="noopener"><code>r/DataIsBeautiful</code></a> post!</p><hr><h2 id="Notes"><a class="anchor hidden-xs" href="#Notes" title="Notes"><i class="fa fa-link"></i></a>Notes</h2><p><sup id="f1">1</sup> Let’s be honest, this whole Master is just an excuse to spend hours on social networks every day. <a href="#a1">↩</a></p><p><sup id="f2">2</sup> S. Kumar, W.L. Hamilton, J. Leskovec, D. Jurafsky. Community Interaction and Conflict on the Web. World Wide Web Conference, 2018. <a href="#a2">↩</a></p><p><sup id="f3">3</sup> Barabási, Réka. Emergence of Scaling in Random Networks, 1999. <a href="#a3">↩</a></p><p><sup id="f4">4</sup> J. Leskovec, J. Kleinberg, C. Faloutsos. Graphs over time: densification laws, shrinking diameters and possible explanations, 2005. <a href="#a4">↩</a></p><p><sup id="f5">5</sup> Such classification in Reddit exists, but it is rather based on the sincerity of redditors, and the moderation of each subreddit by “super-users” called <em>mods</em> (moderators). Relying on users to decide what is NSFW and what is not is bound to create problems, but usually works when combined with the NSFW post detection bot. <a href="#a5">↩</a></p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#ProjetNetwork" title="ProjetNetwork">ProjetNetwork</a><ul class="nav">
+<li><a href="#1---Understanding-the-data" title="1 - Understanding the data">1 - Understanding the data</a><ul class="nav">
+<li><a href="#11---How-reddit-works" title="1.1 - How reddit works">1.1 - How reddit works</a></li>
+<li><a href="#12---What-is-in-the-data" title="1.2 - What is in the data">1.2 - What is in the data</a></li>
+<li><a href="#13---Dynamics-Interactions-or-relations" title="1.3 - Dynamics: Interactions or relations?">1.3 - Dynamics: Interactions or relations?</a></li>
+</ul>
+</li>
+<li><a href="#2---File-conversion-ReadTSVpy" title="2 - File conversion: ReadTSV.py">2 - File conversion: ReadTSV.py</a><ul class="nav">
+<li><a href="#21---Introducing-MultiGraphs-first-example" title="2.1 - Introducing MultiGraphs, first example">2.1 - Introducing MultiGraphs, first example</a></li>
+<li><a href="#22---Selecting-information" title="2.2 - Selecting information">2.2 - Selecting information</a></li>
+<li><a href="#23---Converting-the-file" title="2.3 - Converting the file">2.3 - Converting the file</a></li>
+</ul>
+</li>
+<li><a href="#3---Getting-in-touch-with-the-data-structure" title="3 - Getting in touch with the data structure">3 - Getting in touch with the data structure</a><ul class="nav">
+<li><a href="#31---Storing-the-analysis-functions-Network_Analysispy" title="3.1 - Storing the analysis functions: Network_Analysis.py">3.1 - Storing the analysis functions: Network_Analysis.py</a></li>
+<li><a href="#32---First-approach" title="3.2 - First approach">3.2 - First approach</a></li>
+<li><a href="#33---Degree-distribution" title="3.3 - Degree distribution">3.3 - Degree distribution</a></li>
+<li><a href="#34---Degree-cutting" title="3.4 - Degree cutting">3.4 - Degree cutting</a></li>
+<li><a href="#35---Converting-to-non-multi-Graph" title="3.5 - Converting to non-multi Graph">3.5 - Converting to non-multi Graph</a></li>
+</ul>
+</li>
+<li><a href="#4---Data-Analysis" title="4 - Data Analysis">4 - Data Analysis</a><ul class="nav">
+<li><a href="#41---Simple-reception-metrics" title="4.1 - Simple reception metrics">4.1 - Simple reception metrics</a></li>
+<li><a href="#42---Simple-emission-metrics" title="4.2 - Simple emission metrics">4.2 - Simple emission metrics</a></li>
+<li><a href="#43---Other-index-of-importance" title="4.3 - Other index of importance">4.3 - Other index of importance</a></li>
+<li><a href="#44---The-question-of-normalization" title="4.4 - The question of normalization">4.4 - The question of normalization</a></li>
+<li><a href="#45---General-time-growth-of-Reddit" title="4.5 - General time growth of Reddit">4.5 - General time growth of Reddit</a></li>
+<li><a href="#46---An-other-time-evolution-metric" title="4.6 - An other time evolution metric">4.6 - An other time evolution metric</a></li>
+</ul>
+</li>
+<li><a href="#5---Communities-of-subreddits" title="5 - Communities of subreddits">5 - Communities of subreddits</a><ul class="nav">
+<li><a href="#51---Position-of-the-problem" title="5.1 - Position of the problem">5.1 - Position of the problem</a></li>
+<li><a href="#52---Creating-the-algorithm" title="5.2 - Creating the algorithm">5.2 - Creating the algorithm</a></li>
+<li><a href="#53---Analysis-of-the-communities" title="5.3 - Analysis of the communities">5.3 - Analysis of the communities</a></li>
+<li><a href="#54---Limits-of-this-community-mapping" title="5.4 - Limits of this community mapping">5.4 - Limits of this community mapping</a></li>
+<li><a href="#55---Discussion-on-the-Degree-Cut" title="5.5 - Discussion on the Degree Cut">5.5 - Discussion on the Degree Cut</a></li>
+<li><a href="#56---Conclusion-on-the-community-structure-of-Reddit" title="5.6 - Conclusion on the community structure of Reddit">5.6 - Conclusion on the community structure of Reddit</a></li>
+</ul>
+</li>
+<li><a href="#6---Critical-analysis-of-the-data" title="6 - Critical analysis of the data">6 - Critical analysis of the data</a><ul class="nav">
+<li><a href="#61---Flawed-Cases" title="6.1 - Flawed Cases">6.1 - Flawed Cases</a></li>
+<li><a href="#62---A-proposition-of-explanation" title="6.2 - A proposition of explanation">6.2 - A proposition of explanation</a></li>
+</ul>
+</li>
+<li><a href="#Personal-conclusion-on-the-project" title="Personal conclusion on the project">Personal conclusion on the project</a></li>
+<li><a href="#Notes" title="Notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#ProjetNetwork" title="ProjetNetwork">ProjetNetwork</a><ul class="nav">
+<li><a href="#1---Understanding-the-data" title="1 - Understanding the data">1 - Understanding the data</a><ul class="nav">
+<li><a href="#11---How-reddit-works" title="1.1 - How reddit works">1.1 - How reddit works</a></li>
+<li><a href="#12---What-is-in-the-data" title="1.2 - What is in the data">1.2 - What is in the data</a></li>
+<li><a href="#13---Dynamics-Interactions-or-relations" title="1.3 - Dynamics: Interactions or relations?">1.3 - Dynamics: Interactions or relations?</a></li>
+</ul>
+</li>
+<li><a href="#2---File-conversion-ReadTSVpy" title="2 - File conversion: ReadTSV.py">2 - File conversion: ReadTSV.py</a><ul class="nav">
+<li><a href="#21---Introducing-MultiGraphs-first-example" title="2.1 - Introducing MultiGraphs, first example">2.1 - Introducing MultiGraphs, first example</a></li>
+<li><a href="#22---Selecting-information" title="2.2 - Selecting information">2.2 - Selecting information</a></li>
+<li><a href="#23---Converting-the-file" title="2.3 - Converting the file">2.3 - Converting the file</a></li>
+</ul>
+</li>
+<li><a href="#3---Getting-in-touch-with-the-data-structure" title="3 - Getting in touch with the data structure">3 - Getting in touch with the data structure</a><ul class="nav">
+<li><a href="#31---Storing-the-analysis-functions-Network_Analysispy" title="3.1 - Storing the analysis functions: Network_Analysis.py">3.1 - Storing the analysis functions: Network_Analysis.py</a></li>
+<li><a href="#32---First-approach" title="3.2 - First approach">3.2 - First approach</a></li>
+<li><a href="#33---Degree-distribution" title="3.3 - Degree distribution">3.3 - Degree distribution</a></li>
+<li><a href="#34---Degree-cutting" title="3.4 - Degree cutting">3.4 - Degree cutting</a></li>
+<li><a href="#35---Converting-to-non-multi-Graph" title="3.5 - Converting to non-multi Graph">3.5 - Converting to non-multi Graph</a></li>
+</ul>
+</li>
+<li><a href="#4---Data-Analysis" title="4 - Data Analysis">4 - Data Analysis</a><ul class="nav">
+<li><a href="#41---Simple-reception-metrics" title="4.1 - Simple reception metrics">4.1 - Simple reception metrics</a></li>
+<li><a href="#42---Simple-emission-metrics" title="4.2 - Simple emission metrics">4.2 - Simple emission metrics</a></li>
+<li><a href="#43---Other-index-of-importance" title="4.3 - Other index of importance">4.3 - Other index of importance</a></li>
+<li><a href="#44---The-question-of-normalization" title="4.4 - The question of normalization">4.4 - The question of normalization</a></li>
+<li><a href="#45---General-time-growth-of-Reddit" title="4.5 - General time growth of Reddit">4.5 - General time growth of Reddit</a></li>
+<li><a href="#46---An-other-time-evolution-metric" title="4.6 - An other time evolution metric">4.6 - An other time evolution metric</a></li>
+</ul>
+</li>
+<li><a href="#5---Communities-of-subreddits" title="5 - Communities of subreddits">5 - Communities of subreddits</a><ul class="nav">
+<li><a href="#51---Position-of-the-problem" title="5.1 - Position of the problem">5.1 - Position of the problem</a></li>
+<li><a href="#52---Creating-the-algorithm" title="5.2 - Creating the algorithm">5.2 - Creating the algorithm</a></li>
+<li><a href="#53---Analysis-of-the-communities" title="5.3 - Analysis of the communities">5.3 - Analysis of the communities</a></li>
+<li><a href="#54---Limits-of-this-community-mapping" title="5.4 - Limits of this community mapping">5.4 - Limits of this community mapping</a></li>
+<li><a href="#55---Discussion-on-the-Degree-Cut" title="5.5 - Discussion on the Degree Cut">5.5 - Discussion on the Degree Cut</a></li>
+<li><a href="#56---Conclusion-on-the-community-structure-of-Reddit" title="5.6 - Conclusion on the community structure of Reddit">5.6 - Conclusion on the community structure of Reddit</a></li>
+</ul>
+</li>
+<li><a href="#6---Critical-analysis-of-the-data" title="6 - Critical analysis of the data">6 - Critical analysis of the data</a><ul class="nav">
+<li><a href="#61---Flawed-Cases" title="6.1 - Flawed Cases">6.1 - Flawed Cases</a></li>
+<li><a href="#62---A-proposition-of-explanation" title="6.2 - A proposition of explanation">6.2 - A proposition of explanation</a></li>
+</ul>
+</li>
+<li><a href="#Personal-conclusion-on-the-project" title="Personal conclusion on the project">Personal conclusion on the project</a></li>
+<li><a href="#Notes" title="Notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
