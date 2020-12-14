@@ -26,7 +26,7 @@ The code we implemented and used is available on [GitHub](https://github.com/Yoh
 
 In a nutshell, Reddit allows users to create communities dedicated to a specific topic, named *subreddits*, designed by `r/their_name`. For example the subreddit `r/Cats` talks about cats. In a given subreddit, one can post images, text, or links, and redditors (users of reddit) can then either upvote (like) ou downvote (dislike) the post.
 
-> **Example:** this is a post in `r/Cats`, by the redditor `u/STEMnet`, with a total score of ~26 700 (upvotes - downvotes). It has a unique id (c7s6ww) that allows it to be found without searching, and that appears in the web adress of the post : [reddit.com/c7s6ww](https://www.reddit.com/c7s6ww)
+> **Example:** this is a post in `r/Cats`, by the redditor `u/STEMnet`, with a total score of ~26 700 (upvotes - downvotes). It has a unique id (c7s6ww) that allows it to be found without searching, and that appears in the web adress of the post: [reddit.com/c7s6ww](https://www.reddit.com/c7s6ww)
 > ![](https://i.imgur.com/nq5wMMz.png)
 
 
@@ -124,7 +124,7 @@ In order to really understand the data structure of the graph, we first wanted t
 
 Plotting it might therefore not be an excellent idea. The graph is indeed too large to get a proper display using NetworkX's standard `draw` method. We could imagine a drawing method based on a cut of the graph, for example we could select the higest degree nodes and only plot these.
 
-### 3.3 - Degree cutting
+### 3.3 - Degree distribution
 
 To cut according to the degree of the nodes, we need to find out what the distribution of degrees is. To do so, we designed two functions called `degree_distribution`, and `Degree_distribution_plot`, that do just what their names indicate.
 
@@ -138,7 +138,7 @@ To cut according to the degree of the nodes, we need to find out what the distri
 This plot is quitte interesting, as it tells us that the distribution of degrees is broad, and might be called "scale-free", according to Barabási's definition<sup id="a3">[3](#f3)</sup>. Here though, this is not a caracteristic of interest, therefore we will avoid all controversy and not call it "scale-free", just "with a broad degree distribution".
 
 
-### 3.4 - Plotting
+### 3.4 - Degree cutting
 
 Now that we know that the distribution is broad, we can simply cut it on the degree, as such a cut would still preserve the overall structure of the graph, at least for visual inspection.
 
@@ -173,7 +173,7 @@ It is now time to answer a few questions, such as "which subreddit receives the 
 
 ### 4.1 - Simple reception metrics
 
-We designed a set of function to find out the most loved and hated subreddits. Their usage goes as follows :
+We designed a set of function to find out the most loved and hated subreddits. Their usage goes as follows:
 
 ```python
 >>> positive_score, negative_score=NA.positive_negative_scores(G)
@@ -213,7 +213,7 @@ We might also want to find the second and third subreddits. After a few tribulat
 Conversely, we might ask ourselves what are the subreddits that judge others most positively or negatively.
 
 ```python
->>> positive_score, negative_score=NA.positive_negative_scores(G)
+>>> positive_score, negative_score=NA.positive_negative_scores_emitters(G)
 >>> total_score={i:positive_score[i]-negative_score[i] for i in positive_score}
 >>> most_loved = NA.Key_Max(positive_score)
 subredditdrama 3035
@@ -314,13 +314,13 @@ The first problem here is that the Louvain algorithm only takes the type `Graph`
 The second problem is the the number of nodes: there are many nodes disconnected from the main connected component. Therefore, to avoid detecting useless communities of 1, 2 or 3 subreddits, we decided to only keep the nodes of highest degree. This comes with a major drawback: cutting nodes reduces the community structure of Reddit. This cut has to be at a low degree, and we decided 200 to be the cutoff. 
 
 ```python
-# Cutting on degree
-GG=NA.degree_cut(G,200)
-# Defining a weight for the edges
-_,l1,l2=NA.edge_evaluation(GG)
-weight={i:l1[i] for i in l1}
-# Making the MultiDiGraph a Graph
-GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
+>>> # Cutting on degree
+>>> GG=NA.degree_cut(G,200)
+>>> # Defining a weight for the edges
+>>> _,l1,l2=NA.edge_evaluation(GG)
+>>> weight={i:l1[i] for i in l1}
+>>> # Making the MultiDiGraph a Graph
+>>> GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(GG,l1))
 ```
 
 > One could argue that a connected component detection algorithm would be better, and that is very true, but the degree cutting allows for a smaller computation time and a simpler implementation, for a similar result (we tested that assumption in [section 5.5](#55---Discussion-on-the-Degree-Cut)).
@@ -336,8 +336,8 @@ We created a Python module named `Community_Detection`, containing all the neces
 
 
 ```python
-import Community_Detection as CD
-partition = CD.plot_community(GGG)
+>>> import Community_Detection as CD
+>>> partition = CD.plot_community(GGG)
 ```
 
 
@@ -371,7 +371,7 @@ It is interesting to note that some subreddits end up in categories one would no
 
 ### 5.4 - Limits of this community mapping
 
-The first limit here is that some communities are really close one to an other : technology and video games are so close that `r/BuildaPCforMe` ended up in video games while being clearly closer to technology topic-wise. Likewise, some important subcommunities would deserve their own community, such as American Football.
+The first limit here is that some communities are really close one to an other: technology and video games are so close that `r/BuildaPCforMe` ended up in video games while being clearly closer to technology topic-wise. Likewise, some important subcommunities would deserve their own community, such as American Football.
 
 The next major drawback is that this representation used a degree cut, and is higly dependent on that cut, as we discovered while experimenting. The higher the degree cutoff is, the worse the communities are. A simple explanation for this phenomena is that loosing small subreddits is loosing links of lenght 2 between big subreddits.
 
@@ -385,7 +385,7 @@ The **first** comment one can make about this decision of cutting on the degree 
 
 A **second** comment can be made about the connected component cutoff: one could simply cut the graph to only keep the largest connected component. This is the result we obtained:
 
-```python=
+```python
 >>> GGG=NA.DiGraphToGraph(NA.MultigraphToGraph(G,l1))
 >>> GGG=NA.Largest_Connected_Component(GGG)
 >>> partition = CD.plot_community(GGG)
@@ -399,7 +399,7 @@ This is obviously not acceptable.
 
 A **third** possibility would be to combine the degree cutoff and the connected component cutoff to avoid having small connected components adding noise to the result, while being able to go deeper in the small degree nodes. We tried, and here is the result (going bellow 50 for the degree cutoff makes the plot unreadable):
 
-```python=
+```python
 >>> GG=NA.degree_cut(G,50)
 >>> _,l1,l2=NA.edge_evaluation(GG)
 >>> weight={i:l1[i] for i in l1}
