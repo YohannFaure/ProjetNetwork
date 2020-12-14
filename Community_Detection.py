@@ -39,6 +39,10 @@ def community_layout(g, partition,comscale=8.,nodscale=3.):
     return(pos)
 
 def _position_communities(g, partition, **kwargs):
+    """
+    Determine the position of the communities according to the partition
+    and the spring constants given. Hidden function.
+    """
     # create a weighted graph, in which each node corresponds to a community,
     # and each edge weight to the number of edges between communities
     between_community_edges = _find_between_community_edges(g, partition)
@@ -56,6 +60,9 @@ def _position_communities(g, partition, **kwargs):
     return(pos)
 
 def _find_between_community_edges(g, partition):
+    """
+    Used to apply the spring layout in _position_communities
+    """
     edges = dict()
     for (ni, nj) in g.edges():
         ci = partition[ni]
@@ -69,7 +76,7 @@ def _find_between_community_edges(g, partition):
 
 def _position_nodes(g, partition, **kwargs):
     """
-    Positions nodes within communities.
+    Positions of the nodes within communities.
     """
     communities = dict()
     for node, community in partition.items():
@@ -85,6 +92,10 @@ def _position_nodes(g, partition, **kwargs):
     return(pos)
 
 def plot_community(g,comscale=8.,nodscale=3.):
+    """
+    All in one function to detect and plot the communities inside a graph.
+    This
+    """
     # to install networkx 2.0 compatible version of python-louvain use:
     # pip install -U git+https://github.com/taynaud/python-louvain.git@networkx2
     from community import community_louvain
