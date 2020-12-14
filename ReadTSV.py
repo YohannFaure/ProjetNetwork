@@ -59,7 +59,7 @@ def get_data(location):
 
 def data_to_graph(location):
     """
-    Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a graph.
+    Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a MultiGraph.
     """
     def dic_create(edge_splited):
         dic = {"POST_ID": edge_splited[2][:6], "TIMESTAMP": edge_splited[3],
@@ -81,7 +81,7 @@ def data_to_graph(location):
 
 def data_to_digraph(location):
     """
-    Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a graph.
+    Convert the file from http://snap.stanford.edu/data/soc-RedditHyperlinks.html into a MultiDiGraph.
     """
     def dic_create(edge_splited):
         dic = {"POST_ID": edge_splited[2][:6], "TIMESTAMP": edge_splited[3],

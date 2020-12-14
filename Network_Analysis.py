@@ -174,6 +174,9 @@ def SingleSignEdgesOnly(G,sign=1):
 
 
 def dict_to_sorted_lists(di,j=1):
+    """
+    Converts a dictionnary into a sorted list of tuples. The sorting is realised on the keys if j=0, on the value if j=1, and is reversed.
+    """
     sorted_di = sorted(di.items(), key=lambda x: x[j],reverse=True)
     return(sorted_di)
 
@@ -325,7 +328,7 @@ def seconds_to_timestamp(seconds):
 
 def All_Times(G):
     """
-    Returns
+    Returns the shifted timestamps of the posts.
     """
     l=[]
     for e in G.edges.data("TIMESTAMP"):
@@ -333,11 +336,22 @@ def All_Times(G):
     return(sorted(l))
 
 def Time_Growth(G):
+    """
+    Uses All_Times to return the ploting lists for the time groth of the input graph G.
+    """
     list_times=All_Times(G)
     list_numbers=list(range(len(list_times)))
     return(list_times,list_numbers)
 
 def Plot_Time_Growth(list_times,list_numbers,time_div=5,fit=True):
+    """
+    Uses Time_Growth's output to plot the input graph time growth.
+    example :
+        a,b=Time_Growth(G)
+        Plot_Time_Growth(a,b)
+    The fit parameter corresponds to the addition of the fitting functions. Set to True it will
+    extrapolate a model for the growth.
+    """
     fig=plt.figure()
     t0=list_times[0]
     tf=list_times[-1]
@@ -345,11 +359,11 @@ def Plot_Time_Growth(list_times,list_numbers,time_div=5,fit=True):
     list_times=np.array(list_times)/tf
     list_numbers=np.array(list_numbers)/nf
     plt.plot(list_times,list_numbers,label='Network growth',color="red",alpha=1,linewidth=4, linestyle=':')
-    plt.plot([list_times[0],list_times[-1]],[list_numbers[0],list_numbers[3000]*list_times[-1]/(list_times[3000]-list_times[0])],label='Linear approximation',color="orange",alpha=.5)
-    plt.plot(list_times,(np.exp(list_times)-1)/(np.exp(1)-1),label='exponential approximation',color="green",alpha=1)
     if fit:
         #a,b=np.polyfit(np.exp(np.array(list_times)) , list_numbers, 1 )
         #plt.plot(list_times,a*np.exp(list_times)+b,label="exponential fit",color="orange",alpha=1)
+        plt.plot([list_times[0],list_times[-1]],[list_numbers[0],list_numbers[3000]*list_times[-1]/(list_times[3000]-list_times[0])],label='Linear approximation',color="orange",alpha=.5)
+        plt.plot(list_times,(np.exp(list_times)-1)/(np.exp(1)-1),label='exponential approximation',color="green",alpha=1)
         from scipy.optimize import curve_fit
         def func_powerlaw(x, m, c, c0):
             return c0 + x**m * c
